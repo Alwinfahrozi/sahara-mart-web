@@ -14,13 +14,19 @@
 
 ## 🚀 NEW HERE? START HERE!
 
-> **👉 [TODO_LIST.md](TODO_LIST.md) - ✅ Complete checklist of what needs to be done!**
+### For New AI:
+> **👉 [AI_CONTEXT.md](AI_CONTEXT.md) - 🤖 Current project state & deployment status**
 
-> **👉 [DEPLOY_NOW.md](DEPLOY_NOW.md) - 🚀 Deploy to Vercel in 20 minutes!**
+> **👉 [TODO_URGENT.md](TODO_URGENT.md) - ⚡ Week 1 action items (start here!)**
 
-> **👉 [HANDOVER_FINAL_V7.md](HANDOVER_FINAL_V7.md) - 📦 Latest complete handover (V7)!**
+> **👉 [ROADMAP_2026.md](ROADMAP_2026.md) - 🗓️ 6-month development plan**
 
-> **👉 [START_HERE.md](START_HERE.md) - Quick 5-minute overview!**
+### For Developers:
+> **👉 [HANDOVER_FINAL_V7.md](HANDOVER_FINAL_V7.md) - 📦 Complete technical documentation**
+
+> **👉 [TODO_LIST.md](TODO_LIST.md) - ✅ Post-deployment checklist**
+
+> **👉 [DEPLOY_NOW.md](DEPLOY_NOW.md) - 🚀 Deployment guide (if not deployed yet)**
 
 ---
 
