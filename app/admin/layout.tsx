@@ -177,14 +177,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           {/* Mobile Header */}
-          <div className="lg:hidden bg-white border-b px-4 py-3 flex items-center justify-between shadow-sm">
+          <div className="lg:hidden bg-white border-b px-4 py-3 flex items-center justify-between shadow-sm sticky top-[42px] z-40">
             <div className="flex items-center gap-2">
               <div className="bg-[#E60000] text-white px-3 py-1 rounded font-bold">SAHARA</div>
               <span className="font-bold text-gray-800">ADMIN</span>
             </div>
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 hover:bg-gray-100 rounded-lg"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Toggle menu"
             >
               {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -193,9 +194,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="flex">
             {/* Sidebar */}
             <aside className={`
-              fixed lg:static inset-y-0 left-0 z-40
+              fixed lg:static inset-y-0 left-0 z-[45]
               w-64 bg-white border-r shadow-lg transform transition-transform duration-300
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+              lg:mt-0 mt-[90px]
             `}>
               {/* Admin Badge Header */}
               <div className="bg-gradient-to-br from-red-600 to-red-700 p-6 text-white">
@@ -254,8 +256,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             {/* Overlay for mobile */}
             {sidebarOpen && (
               <div
-                className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+                className="fixed inset-0 bg-black/50 z-[44] lg:hidden"
                 onClick={() => setSidebarOpen(false)}
+                aria-label="Close menu"
               />
             )}
 
