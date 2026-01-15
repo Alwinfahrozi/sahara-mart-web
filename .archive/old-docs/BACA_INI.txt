@@ -1,0 +1,73 @@
+========================================
+🚨 MASALAH & SOLUSI 🚨
+========================================
+
+MASALAH:
+Database punya 2 kolom: 'total' DAN 'total_amount'
+'total' = NOT NULL (causing error!)
+'total_amount' = Already exists
+
+ERROR:
+"column total_amount already exists"
+"null value in column total violates not-null"
+
+SOLUSI:
+Drop kolom 'total' yang lama
+Keep 'total_amount' (sudah ada)
+
+========================================
+JALANKAN SQL INI:
+========================================
+
+File: database/FIX_SEKARANG.sql
+
+LANGKAH:
+1. Buka: https://supabase.com/dashboard
+2. Select: Sahara Mart
+3. Click: SQL Editor → New Query
+4. Copy: ISI database/FIX_SEKARANG.sql
+5. Paste & Run
+6. Tunggu sampai selesai
+7. Settings → API → Reload schema ⚠️
+8. node scripts/verify-database.js
+
+EXPECTED:
+✅ Dropped old column: total
+✅ Added unique constraint
+✅ Added foreign key
+✅ Test order number: ORD-20260113-XXX
+✅ All checks passed!
+
+========================================
+SETELAH ITU:
+========================================
+
+npm run dev
+→ Create order
+→ Check WhatsApp (HARUS ADA order number!)
+→ Check admin panel (order HARUS muncul!)
+→ Done! 🎉
+
+========================================
+TIME: 5 MENIT
+========================================
+
+Yang dilakukan script:
+✅ Drop kolom 'total' (yang NOT NULL)
+✅ Keep 'total_amount' (yang sudah ada)
+✅ Add semua missing columns
+✅ Create function generate_order_number()
+✅ Create indexes
+✅ Create triggers
+✅ Verification queries
+
+========================================
+JANGAN LUPA:
+========================================
+
+⚠️ REFRESH SCHEMA CACHE! ⚠️
+Settings → API → Reload schema
+
+Tanpa ini, error masih akan muncul!
+
+========================================
