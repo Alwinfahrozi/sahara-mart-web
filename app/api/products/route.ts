@@ -33,8 +33,8 @@ export async function GET(request: NextRequest) {
   }
   
   if (search) {
-    // Search in name, SKU, and description
-    query = query.or(`name.ilike.%${search}%,sku.ilike.%${search}%,description.ilike.%${search}%`);
+    // Search in name, SKU, barcode, and description
+    query = query.or(`name.ilike.%${search}%,sku.ilike.%${search}%,barcode.ilike.%${search}%,description.ilike.%${search}%`);
   }
   
   if (featured) {
@@ -108,6 +108,7 @@ export async function POST(request: NextRequest) {
         stock: body.stock,
         weight: body.weight || '',
         sku: body.sku || null,
+        barcode: body.barcode || null,
         description: body.description || '',
         image_url: body.image_url || null,
         is_active: body.is_active ?? true,

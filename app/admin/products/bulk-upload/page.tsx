@@ -13,6 +13,7 @@ type ParsedProduct = {
   stock: number;
   weight?: string;
   sku?: string;
+  barcode?: string;
   description?: string;
   image_url?: string;
   is_active?: boolean;
@@ -295,6 +296,7 @@ export default function BulkUploadPage() {
             stock: 0, // Default 0, user bisa update manual
             weight: satuan ? String(satuan).trim() : undefined,
             sku: kodeItem ? String(kodeItem).trim() : (barcode ? String(barcode).trim() : undefined),
+            barcode: barcode ? String(barcode).trim() : undefined,
             description: finalDescription,
             image_url: undefined,
             is_active: true,

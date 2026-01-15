@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Plus, Search, Edit, Trash2, Filter, ChevronLeft, ChevronRight, Upload } from 'lucide-react';
 import toast from 'react-hot-toast';
+import BarcodeScanner from '@/components/admin/BarcodeScanner';
 
 // Tipe data sesuai schema database
 type Product = {
@@ -148,6 +149,24 @@ export default function AdminProductsPage() {
         </div>
       </div>
 
+      {/* Barcode Scanner Section */}
+      <div className="mb-6 bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl p-6 shadow-sm">
+        <div className="mb-3">
+          <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+            🔍 Scan Barcode
+          </h3>
+          <p className="text-sm text-gray-600">Cari produk dengan cepat menggunakan barcode scanner</p>
+        </div>
+        <BarcodeScanner
+          onScan={(barcode) => {
+            setSearchTerm(barcode);
+            toast.success(`Mencari produk dengan barcode: ${barcode}`);
+          }}
+          placeholder="Scan barcode atau ketik manual..."
+          autoFocus={false}
+        />
+      </div>
+
       {/* Filters Section */}
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         {/* Search Bar */}
@@ -157,7 +176,7 @@ export default function AdminProductsPage() {
           </div>
           <input
   type="text"
-  placeholder="Cari nama produk atau SKU..."
+  placeholder="Cari nama produk, SKU, atau barcode..."
   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-900 placeholder:text-gray-400"
   value={searchTerm}
   onChange={(e) => setSearchTerm(e.target.value)}
