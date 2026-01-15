@@ -13,7 +13,8 @@ import {
   Menu,
   X,
   Upload,
-  Home
+  Home,
+  TrendingUp
 } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
 import '../globals.css';
@@ -145,6 +146,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
     { icon: Package, label: 'Produk', href: '/admin/products' },
     { icon: Upload, label: 'Bulk Upload', href: '/admin/products/bulk-upload' },
+    { icon: TrendingUp, label: 'Stok', href: '/admin/stock' },
     { icon: ShoppingCart, label: 'Pesanan', href: '/admin/orders' },
   ];
 

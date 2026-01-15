@@ -257,6 +257,37 @@ export default function AdminDashboard() {
         </div>
       ) : (
         <div className="space-y-8">
+          {/* Stock Alerts Banner */}
+          {(productStats.lowStockProducts > 0 || productStats.outOfStockProducts > 0) && (
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                    ⚠️ Peringatan Stok
+                  </h3>
+                  <div className="space-y-1">
+                    {productStats.lowStockProducts > 0 && (
+                      <p className="text-white/90">
+                        • {productStats.lowStockProducts} produk dengan stok menipis (≤ 5 unit)
+                      </p>
+                    )}
+                    {productStats.outOfStockProducts > 0 && (
+                      <p className="text-white/90">
+                        • {productStats.outOfStockProducts} produk stok habis
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <Link
+                  href="/admin/stock"
+                  className="bg-white text-orange-600 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors whitespace-nowrap"
+                >
+                  Kelola Stok →
+                </Link>
+              </div>
+            </div>
+          )}
+
           {/* SECTION 1: Sales Stats - Today, Week, Month */}
           <div>
             <h2 className="text-xl font-bold text-gray-800 mb-4">
