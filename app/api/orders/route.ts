@@ -1,11 +1,37 @@
 import { createServerClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit, getClientIdentifier, RATE_LIMITS, createRateLimitHeaders } from '@/lib/rateLimiter';
+import { requireCsrfToken } from '@/lib/csrf';
 
 // ============================================================
 // POST /api/orders - Create New Order
 // ============================================================
 export async function POST(request: NextRequest) {
   try {
+    // ===== CSRF PROTECTION: Prevent CSRF attacks =====
+    const csrfError = await requireCsrfToken(request);
+    if (csrfError) {
+      return csrfError;
+    }
+
+    // ===== RATE LIMITING: Prevent API abuse =====
+    const identifier = getClientIdentifier(request);
+    const rateLimitResult = rateLimit(identifier, RATE_LIMITS.orders);
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          error: 'Too many requests',
+          message: 'Terlalu banyak permintaan. Silakan coba lagi nanti.',
+          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000),
+        },
+        {
+          status: 429,
+          headers: createRateLimitHeaders(rateLimitResult),
+        }
+      );
+    }
+
     const supabase = await createServerClient();
     const body = await request.json();
 

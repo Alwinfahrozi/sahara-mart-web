@@ -1,8 +1,26 @@
 import { createServerClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { generateUniqueSlug } from '@/lib/utils';
+import { rateLimit, getClientIdentifier, RATE_LIMITS, createRateLimitHeaders } from '@/lib/rateLimiter';
 
 export async function GET(request: NextRequest) {
+  // Rate limiting for public endpoint
+  const identifier = getClientIdentifier(request);
+  const rateLimitResult = rateLimit(identifier, RATE_LIMITS.public);
+
+  if (!rateLimitResult.success) {
+    return NextResponse.json(
+      {
+        error: 'Too many requests',
+        message: 'Terlalu banyak permintaan. Silakan coba lagi nanti.',
+      },
+      {
+        status: 429,
+        headers: createRateLimitHeaders(rateLimitResult),
+      }
+    );
+  }
+
   const supabase = await createServerClient();
   const searchParams = request.nextUrl.searchParams;
   
