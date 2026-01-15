@@ -33,7 +33,7 @@ export default function Header() {
             <span className="text-gray-800 font-bold text-xl">MART</span>
           </Link>
 
-          {/* Search Bar */}
+          {/* Search Bar - Desktop */}
           <div className="hidden md:flex flex-1 max-w-2xl">
             <form onSubmit={handleSearch} className="relative w-full">
               <input
@@ -77,18 +77,18 @@ export default function Header() {
         </div>
 
         {/* Mobile Search */}
-        <div className="md:hidden mt-4">
+        <div className="md:hidden mt-3">
           <form onSubmit={handleSearch} className="relative">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari produk..."
-              className="w-full border-2 border-gray-300 rounded-xl py-2 pl-4 pr-12 focus:outline-none focus:border-[#E60000] text-gray-900 placeholder:text-gray-400"
+              className="w-full border-2 border-gray-300 rounded-xl py-2.5 pl-4 pr-12 focus:outline-none focus:border-[#E60000] text-gray-900 placeholder:text-gray-400 text-sm"
             />
             <button
               type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#E60000] text-white p-2 rounded-lg"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#E60000] text-white p-2 rounded-lg hover:bg-[#cc0000] transition-colors"
             >
               <Search className="w-4 h-4" />
             </button>

@@ -67,7 +67,7 @@ export default function HomePage() {
     <>
       {/* Hero Slider */}
       <section className="relative bg-gray-900 overflow-hidden">
-        <div className="relative h-[400px] md:h-[500px]">
+        <div className="relative h-[350px] sm:h-[400px] md:h-[500px]">
           {promos.map((promo, index) => (
             <div
               key={promo.id}
@@ -79,9 +79,9 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent">
                 <div className="container mx-auto px-4 h-full flex items-center">
                   <div className="text-white max-w-2xl">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">{promo.title}</h1>
-                    <p className="text-xl md:text-2xl mb-8">{promo.subtitle}</p>
-                    <Link href="/katalog" className="inline-block bg-[#E60000] text-white px-8 py-4 rounded-xl hover:bg-[#cc0000] transition-colors font-semibold">
+                    <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 md:mb-4 leading-tight">{promo.title}</h1>
+                    <p className="text-base sm:text-xl md:text-2xl mb-6 md:mb-8">{promo.subtitle}</p>
+                    <Link href="/katalog" className="inline-block bg-[#E60000] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-[#cc0000] transition-colors font-semibold text-sm sm:text-base">
                       Belanja Sekarang
                     </Link>
                   </div>
@@ -112,18 +112,18 @@ export default function HomePage() {
       </section>
 
       {/* Category Grid */}
-      <section className="bg-[#F3F4F6] py-12">
+      <section className="bg-[#F3F4F6] py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Kategori Produk</h2>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-gray-800">Kategori Produk</h2>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-6">
             {categories.map((category) => (
               <Link
                 key={category.id}
                 href="/katalog"
-                className="bg-white p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group text-center"
+                className="bg-white p-4 md:p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group text-center"
               >
-                <div className="text-5xl mb-3 group-hover:scale-110 transition-transform">{category.icon}</div>
-                <p className="font-semibold text-gray-700 text-sm md:text-base">{category.name}</p>
+                <div className="text-4xl md:text-5xl mb-2 md:mb-3 group-hover:scale-110 transition-transform">{category.icon}</div>
+                <p className="font-semibold text-gray-700 text-xs md:text-base">{category.name}</p>
               </Link>
             ))}
           </div>
@@ -203,30 +203,31 @@ export default function HomePage() {
                       </div>
 
                       {/* Actions */}
-                      {/* Actions */}
 <div className="flex flex-col gap-2">
   {/* Button Tambah ke Keranjang */}
   <button
     onClick={() => handleAddToCart(product)}
-    className="w-full bg-[#E60000] text-white py-2.5 rounded-xl text-sm font-bold hover:bg-[#CC0000] transition-colors flex items-center justify-center gap-2"
+    className="w-full bg-[#E60000] text-white py-2.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#CC0000] transition-colors flex items-center justify-center gap-2"
   >
-    <ShoppingCart className="w-4 h-4" />
-    Tambah ke Keranjang
+    <ShoppingCart className="w-4 h-4 flex-shrink-0" />
+    <span className="hidden sm:inline">Tambah ke Keranjang</span>
+    <span className="sm:hidden">+ Keranjang</span>
   </button>
-  
+
   {/* Button Detail dan Pesan */}
   <div className="flex gap-2">
     <Link
       href={`/produk/${product.id}`}
-      className="flex-1 border-2 border-[#E60000] text-[#E60000] py-2 rounded-xl text-sm font-bold hover:bg-[#FEE2E2] transition-colors text-center"
+      className="flex-1 border-2 border-[#E60000] text-[#E60000] py-2 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#FEE2E2] transition-colors text-center"
     >
       Detail
     </Link>
     <button
       onClick={() => handleWhatsAppOrder(product)}
-      className="flex-1 border-2 border-green-600 text-green-600 py-2 rounded-xl text-sm font-bold hover:bg-green-50 transition-colors"
+      className="flex-1 border-2 border-green-600 text-green-600 py-2 rounded-xl text-xs sm:text-sm font-bold hover:bg-green-50 transition-colors whitespace-nowrap"
     >
-      Pesan WA
+      <span className="hidden sm:inline">Pesan WA</span>
+      <span className="sm:hidden">WA</span>
     </button>
   </div>
 </div>
@@ -240,10 +241,10 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-[#F3F4F6] py-16">
+      <section className="bg-[#F3F4F6] py-8 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Mengapa Belanja di Sahara Mart?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800">Mengapa Belanja di Sahara Mart?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <div className="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow">
               <div className="bg-[#FEE2E2] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Award className="w-8 h-8 text-[#E60000]" />
@@ -277,16 +278,16 @@ export default function HomePage() {
       </section>
 
       {/* Customer Testimonials */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-8 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 text-gray-800">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3 md:mb-4 text-gray-800">
             Kata Pelanggan Kami
           </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-sm md:text-base text-gray-600 mb-8 md:mb-12 max-w-2xl mx-auto">
             Kepuasan pelanggan adalah prioritas kami. Lihat apa kata mereka tentang pengalaman berbelanja di Sahara Mart
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
             {/* Testimonial 1 */}
             <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center mb-4">
@@ -346,9 +347,9 @@ export default function HomePage() {
           </div>
 
           {/* Feedback Form */}
-          <div className="bg-gradient-to-r from-[#E60000] to-[#cc0000] rounded-2xl p-8 md:p-12 text-white max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold mb-2 text-center">Bagikan Pengalaman Anda</h3>
-            <p className="text-center text-white/90 mb-6">
+          <div className="bg-gradient-to-r from-[#E60000] to-[#cc0000] rounded-2xl p-6 md:p-12 text-white max-w-3xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-center">Bagikan Pengalaman Anda</h3>
+            <p className="text-center text-sm md:text-base text-white/90 mb-6">
               Sudah pernah belanja di Sahara Mart? Yuk share pengalaman Anda!
             </p>
 
@@ -398,12 +399,12 @@ export default function HomePage() {
       </section>
 
       {/* Location Finder */}
-      <section className="py-16 bg-white">
+      <section className="py-8 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-[#E60000] to-[#cc0000] rounded-2xl p-8 md:p-12 text-white">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="bg-gradient-to-r from-[#E60000] to-[#cc0000] rounded-2xl p-6 md:p-12 text-white">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-4">Lokasi Toko Kami</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Lokasi Toko Kami</h2>
                 <p className="mb-6 text-white/90">
                   Hapesong Baru, Batang Toru, Tapanuli Selatan, North Sumatra 22738
                 </p>

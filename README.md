@@ -14,9 +14,13 @@
 
 ## 🚀 NEW HERE? START HERE!
 
-> **👉 [START_HERE.md](START_HERE.md) - Your 5-minute guide to understanding the project!**
+> **👉 [TODO_LIST.md](TODO_LIST.md) - ✅ Complete checklist of what needs to be done!**
 
-> **👉 [QUICK_START.md](QUICK_START.md) - Launch the website in 40 minutes!**
+> **👉 [DEPLOY_NOW.md](DEPLOY_NOW.md) - 🚀 Deploy to Vercel in 20 minutes!**
+
+> **👉 [HANDOVER_FINAL_V7.md](HANDOVER_FINAL_V7.md) - 📦 Latest complete handover (V7)!**
+
+> **👉 [START_HERE.md](START_HERE.md) - Quick 5-minute overview!**
 
 ---
 
