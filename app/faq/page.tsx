@@ -118,29 +118,33 @@ const faqs = [
     ]
   },
   {
-    category: 'Produk & Stok',
+    category: 'Produk & Kualitas',
     icon: HelpCircle,
     color: 'red',
     questions: [
       {
         q: 'Bagaimana memastikan produk asli/original?',
-        a: 'Semua produk kami dijamin original dari distributor resmi. Kami tidak menjual barang KW/palsu. Setiap produk dapat dilacak keasliannya.'
-      },
-      {
-        q: 'Stok produk real-time?',
-        a: 'Stok yang ditampilkan di website adalah real-time. Namun, stok dapat berubah cepat. Kami akan konfirmasi ketersediaan saat Anda checkout.'
+        a: 'Semua produk kami dijamin original dari distributor resmi. Kami tidak menjual barang KW/palsu. Setiap produk dapat dilacak keasliannya dengan barcode yang tertera pada kemasan.'
       },
       {
         q: 'Produk habis, kapan restock?',
-        a: 'Waktu restock bervariasi (1-2 minggu). Anda bisa subscribe notifikasi restock dengan menghubungi CS atau follow media sosial kami untuk update.'
+        a: 'Waktu restock bervariasi (1-2 minggu). Anda bisa subscribe notifikasi restock dengan menghubungi CS atau follow media sosial kami untuk update. Admin akan dinotifikasi otomatis saat stok produk mencapai level rendah untuk memastikan restocking tepat waktu.'
       },
       {
         q: 'Bisa request produk yang tidak ada?',
-        a: 'Bisa! Kirim request produk via WhatsApp. Kami akan coba sediakan jika memungkinkan dan ada demand yang cukup.'
+        a: 'Bisa! Kirim request produk via WhatsApp. Kami akan coba sediakan jika memungkinkan dan ada demand yang cukup. Setiap request akan kami evaluasi dan pertimbangkan untuk menambah variasi produk kami.'
       },
       {
         q: 'Harga di website sama dengan toko offline?',
-        a: 'Harga online dan offline mungkin berbeda karena promo khusus. Namun kami selalu berusaha memberikan harga terbaik di semua channel.'
+        a: 'Harga online dan offline mungkin berbeda karena promo khusus. Namun kami selalu berusaha memberikan harga terbaik di semua channel. Follow media sosial kami untuk mendapatkan info promo eksklusif!'
+      },
+      {
+        q: 'Apakah ada garansi produk?',
+        a: 'Garansi tergantung jenis produk. Produk elektronik biasanya memiliki garansi distributor 1-2 tahun. Untuk produk makanan/minuman, kami jamin kualitas dan tanggal kadaluarsa yang masih lama. Cek detail garansi di deskripsi masing-masing produk.'
+      },
+      {
+        q: 'Bagaimana standar kualitas produk di Sahara Mart?',
+        a: 'Semua produk melalui quality control ketat sebelum dipasarkan. Kami hanya bekerja sama dengan supplier dan distributor resmi yang terpercaya. Produk rusak atau cacat dapat dikembalikan 100%.'
       }
     ]
   },
@@ -168,6 +172,87 @@ const faqs = [
       {
         q: 'Ada promo/diskon?',
         a: 'Ya! Kami sering ada promo spesial: (1) Flash sale setiap hari, (2) Diskon hari raya, (3) Voucher pelanggan setia. Follow Instagram kami @saharamart untuk update promo!'
+      },
+      {
+        q: 'Bagaimana cara menggunakan barcode scanner?',
+        a: 'Di halaman admin, klik tombol "Scan Barcode" untuk mengaktifkan kamera. Arahkan kamera ke barcode produk, dan sistem akan otomatis mencari produk tersebut. Fitur ini memudahkan admin untuk mencari produk dengan cepat.'
+      }
+    ]
+  },
+  {
+    category: 'Keamanan & Privasi',
+    icon: HelpCircle,
+    color: 'red',
+    questions: [
+      {
+        q: 'Bagaimana Sahara Mart melindungi data pribadi saya?',
+        a: 'Kami sangat serius dalam melindungi data Anda. Semua data dienkripsi dengan HTTPS, disimpan di server aman (Supabase), dan tunduk pada UU PDP Indonesia. Kami tidak pernah menjual data Anda ke pihak ketiga. Lihat Kebijakan Privasi untuk detail lengkap.'
+      },
+      {
+        q: 'Apakah website ini aman untuk transaksi?',
+        a: 'Ya, sangat aman! Website kami dilengkapi dengan: (1) Enkripsi HTTPS, (2) CSRF Protection untuk mencegah serangan, (3) Rate limiting untuk melindungi dari spam, (4) Database encryption, (5) Regular security audit. Semua transaksi melalui WhatsApp juga dienkripsi end-to-end.'
+      },
+      {
+        q: 'Apa yang dilakukan dengan informasi yang saya berikan?',
+        a: 'Informasi Anda digunakan hanya untuk: (1) Memproses pesanan, (2) Mengirim produk, (3) Komunikasi terkait pesanan, (4) Meningkatkan layanan kami. Kami TIDAK menggunakan data Anda untuk spam atau menjualnya ke pihak lain.'
+      },
+      {
+        q: 'Apakah cookies digunakan? Untuk apa?',
+        a: 'Ya, kami menggunakan cookies untuk: (1) Menyimpan keranjang belanja, (2) Mengingat preferensi Anda, (3) Keamanan (CSRF token), (4) Analytics untuk meningkatkan website. Anda dapat mengatur atau menolak cookies di browser Anda.'
+      },
+      {
+        q: 'Bagaimana cara menghapus data pribadi saya?',
+        a: 'Anda memiliki hak untuk menghapus data pribadi Anda. Hubungi kami via WhatsApp atau email dengan permintaan penghapusan data. Kami akan proses dalam 14 hari kerja sesuai UU PDP Indonesia. Data transaksi yang diperlukan untuk kepatuhan hukum akan tetap disimpan sesuai regulasi.'
+      }
+    ]
+  },
+  {
+    category: 'Stok & Inventory',
+    icon: HelpCircle,
+    color: 'purple',
+    questions: [
+      {
+        q: 'Bagaimana cara kerja notifikasi stok rendah?',
+        a: 'Admin akan menerima notifikasi otomatis ketika stok produk mencapai 5 unit atau kurang. Notifikasi muncul di dashboard admin untuk memastikan restocking tepat waktu dan mencegah kehabisan stok.'
+      },
+      {
+        q: 'Apakah ada riwayat perubahan stok?',
+        a: 'Ya! Sistem kami mencatat setiap penambahan dan pengurangan stok secara otomatis. Admin dapat melihat riwayat lengkap termasuk tanggal, jumlah perubahan, dan alasan (penjualan, restocking, adjustment) di dashboard admin.'
+      },
+      {
+        q: 'Bagaimana cara menambah stok produk?',
+        a: 'Admin dapat menambah stok melalui dashboard admin dengan fitur "Tambah Stok". Setiap penambahan akan tercatat otomatis dengan timestamp dan jumlah, memastikan akuntabilitas dan audit trail yang jelas.'
+      },
+      {
+        q: 'Apakah stok tersinkronisasi real-time?',
+        a: 'Ya! Stok diupdate secara real-time. Ketika pelanggan melakukan pemesanan atau admin mengubah stok, perubahan langsung tercermin di database dan website. Ini mencegah overselling dan memastikan keakuratan stok.'
+      }
+    ]
+  },
+  {
+    category: 'Fitur Admin',
+    icon: MessageCircle,
+    color: 'indigo',
+    questions: [
+      {
+        q: 'Bagaimana cara mengakses dashboard admin?',
+        a: 'Klik menu hamburger di pojok kiri atas, pilih "Admin Dashboard". Anda akan diarahkan ke halaman admin dengan berbagai fitur manajemen produk, kategori, pesanan, dan analytics.'
+      },
+      {
+        q: 'Fitur apa saja yang tersedia di admin dashboard?',
+        a: 'Admin dashboard menyediakan: (1) Manajemen Produk (CRUD, barcode scanner), (2) Manajemen Kategori, (3) Manajemen Pesanan & Tracking, (4) Analytics & Reporting, (5) Stok Management dengan notifikasi, (6) CSV Upload untuk bulk import, (7) Search & Filter canggih.'
+      },
+      {
+        q: 'Bagaimana cara upload produk massal via CSV?',
+        a: 'Di halaman admin, pilih "Upload CSV". Format CSV harus memiliki kolom: name, category, price, stock, unit, barcode (opsional). Download template CSV yang disediakan, isi data produk, lalu upload. Sistem akan memproses dan import semua produk sekaligus.'
+      },
+      {
+        q: 'Apakah bisa mengedit produk yang sudah ada?',
+        a: 'Ya! Di halaman admin, klik produk yang ingin diedit, ubah informasi (nama, harga, stok, kategori, gambar, dll), lalu klik "Update". Perubahan akan langsung tersimpan dan terlihat di website.'
+      },
+      {
+        q: 'Bagaimana cara melihat analytics dan laporan?',
+        a: 'Dashboard admin menampilkan analytics real-time termasuk: (1) Total penjualan, (2) Produk terlaris, (3) Revenue trends, (4) Kategori populer, (5) Status pesanan. Data diupdate otomatis untuk membantu pengambilan keputusan bisnis.'
       }
     ]
   }
@@ -246,9 +331,20 @@ export default function FAQPage() {
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           ❓ Pertanyaan yang Sering Diajukan (FAQ)
         </h1>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-4">
           Temukan jawaban untuk pertanyaan umum tentang berbelanja di Sahara Mart
         </p>
+        <div className="flex flex-wrap gap-3 justify-center items-center">
+          <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+            📚 {faqs.reduce((acc, cat) => acc + cat.questions.length, 0)} Pertanyaan
+          </span>
+          <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
+            🗂️ {faqs.length} Kategori
+          </span>
+          <span className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+            🔄 Update: 16 Jan 2026
+          </span>
+        </div>
       </div>
 
       {/* Search Bar */}
@@ -410,6 +506,92 @@ export default function FAQPage() {
         <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-6">
           <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
           <div className="text-gray-600">Kepuasan Pelanggan</div>
+        </div>
+      </div>
+
+      {/* Helpful Tips */}
+      <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-8">
+        <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          💡 Tips Berbelanja di Sahara Mart
+        </h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <span className="text-green-600">✅</span> Sebelum Memesan
+            </h4>
+            <ul className="text-sm text-gray-700 space-y-1 ml-6">
+              <li>• Pastikan stok tersedia di halaman produk</li>
+              <li>• Cek detail produk, harga, dan spesifikasi</li>
+              <li>• Siapkan alamat lengkap untuk pengiriman</li>
+              <li>• Screenshot produk jika perlu referensi</li>
+            </ul>
+          </div>
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <span className="text-blue-600">📦</span> Saat Menerima Paket
+            </h4>
+            <ul className="text-sm text-gray-700 space-y-1 ml-6">
+              <li>• Cek kondisi paket sebelum terima</li>
+              <li>• Foto/video proses unboxing sebagai bukti</li>
+              <li>• Periksa kelengkapan dan kondisi produk</li>
+              <li>• Laporkan kerusakan dalam 1x24 jam</li>
+            </ul>
+          </div>
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <span className="text-orange-600">💳</span> Pembayaran Aman
+            </h4>
+            <ul className="text-sm text-gray-700 space-y-1 ml-6">
+              <li>• Transfer ke rekening resmi Sahara Mart</li>
+              <li>• Simpan bukti transfer dengan baik</li>
+              <li>• Konfirmasi pembayaran via WhatsApp</li>
+              <li>• Jangan transfer ke rekening pribadi</li>
+            </ul>
+          </div>
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <span className="text-purple-600">🎁</span> Hemat Lebih Banyak
+            </h4>
+            <ul className="text-sm text-gray-700 space-y-1 ml-6">
+              <li>• Manfaatkan free ongkir min. Rp 100.000</li>
+              <li>• Follow Instagram untuk promo eksklusif</li>
+              <li>• Gabung grup WhatsApp untuk flash sale</li>
+              <li>• Belanja saat ada diskon hari raya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Related Links */}
+      <div className="mt-8 bg-gray-50 border border-gray-200 rounded-xl p-6">
+        <h3 className="text-lg font-bold text-gray-800 mb-4 text-center">
+          📄 Dokumen Terkait
+        </h3>
+        <div className="flex flex-wrap gap-3 justify-center">
+          <a
+            href="/privacy"
+            className="bg-white border-2 border-blue-200 text-blue-700 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+          >
+            🔒 Kebijakan Privasi
+          </a>
+          <a
+            href="/terms"
+            className="bg-white border-2 border-green-200 text-green-700 px-4 py-2 rounded-lg font-semibold hover:bg-green-50 transition-colors"
+          >
+            📜 Syarat & Ketentuan
+          </a>
+          <a
+            href="/return-policy"
+            className="bg-white border-2 border-orange-200 text-orange-700 px-4 py-2 rounded-lg font-semibold hover:bg-orange-50 transition-colors"
+          >
+            🔄 Kebijakan Pengembalian
+          </a>
+          <a
+            href="/shipping-policy"
+            className="bg-white border-2 border-purple-200 text-purple-700 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
+          >
+            🚚 Kebijakan Pengiriman
+          </a>
         </div>
       </div>
     </div>

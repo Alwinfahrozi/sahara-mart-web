@@ -12,8 +12,14 @@ export default function TermsOfService() {
         Syarat & Ketentuan
       </h1>
       <p className="text-gray-600 mb-8">
-        Terakhir diperbarui: 14 Januari 2026
+        Terakhir diperbarui: 16 Januari 2026
       </p>
+
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-8">
+        <p className="text-gray-800 leading-relaxed">
+          <strong className="text-blue-800">📜 Pemberitahuan Penting:</strong> Syarat & Ketentuan ini merupakan perjanjian hukum yang mengikat antara Anda dan Sahara Mart. Harap membaca dengan saksama sebelum menggunakan layanan kami. Dengan mengakses atau menggunakan website ini, Anda menyatakan bahwa Anda telah membaca, memahami, dan menyetujui untuk terikat oleh seluruh ketentuan yang tercantum di bawah ini.
+        </p>
+      </div>
 
       <div className="prose prose-lg max-w-none space-y-8">
         {/* Penerimaan */}
@@ -108,10 +114,12 @@ export default function TermsOfService() {
             3.2. Harga dan Ketersediaan
           </h3>
           <ul className="list-disc pl-6 space-y-2 text-gray-700">
-            <li>Semua harga dalam Rupiah (IDR) dan sudah termasuk PPN</li>
-            <li>Harga dapat berubah sewaktu-waktu tanpa pemberitahuan</li>
+            <li>Semua harga dalam Rupiah (IDR) dan sudah termasuk PPN 11%</li>
+            <li>Harga dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya</li>
             <li>Ketersediaan stok tidak dijamin hingga pembayaran dikonfirmasi</li>
-            <li>Kami berhak menolak atau membatalkan pesanan karena alasan tertentu</li>
+            <li>Kami berhak menolak atau membatalkan pesanan karena alasan tertentu (fraud, error harga, stok habis)</li>
+            <li>Kesalahan harga yang jelas (typo/error) tidak mengikat kami</li>
+            <li>Konfirmasi pesanan bukan jaminan ketersediaan produk</li>
           </ul>
 
           <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-6">
@@ -315,10 +323,215 @@ export default function TermsOfService() {
           </p>
         </section>
 
+        {/* Privasi Data - NEW */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            13. Privasi & Perlindungan Data
+          </h2>
+          <p className="text-gray-700 mb-4">
+            Penggunaan layanan kami juga tunduk pada Kebijakan Privasi kami yang terpisah.
+            Dengan menyetujui Syarat & Ketentuan ini, Anda juga menyetujui:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <li>Pengumpulan, penggunaan, dan penyimpanan data pribadi Anda sesuai UU PDP Indonesia</li>
+            <li>Penggunaan cookies dan teknologi pelacakan untuk meningkatkan pengalaman Anda</li>
+            <li>Komunikasi pemasaran (dengan opsi opt-out kapan saja)</li>
+            <li>Berbagi data dengan pihak ketiga terpilih untuk proses pengiriman dan pembayaran</li>
+          </ul>
+          <p className="text-gray-700 mt-4">
+            Baca selengkapnya di{' '}
+            <a href="/privacy" className="text-blue-600 hover:underline font-semibold">
+              Kebijakan Privasi
+            </a>
+            {' '}kami.
+          </p>
+        </section>
+
+        {/* Force Majeure - NEW */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            14. Force Majeure (Keadaan Kahar)
+          </h2>
+          <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+            <p className="text-gray-700 mb-3">
+              Sahara Mart tidak bertanggung jawab atas kegagalan atau keterlambatan dalam
+              memenuhi kewajiban yang disebabkan oleh keadaan di luar kendali kami, termasuk:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-gray-700">
+              <li>Bencana alam (gempa bumi, banjir, kebakaran)</li>
+              <li>Perang, terorisme, kerusuhan sipil</li>
+              <li>Pandemi atau wabah penyakit</li>
+              <li>Gangguan listrik atau internet berskala besar</li>
+              <li>Tindakan pemerintah (lockdown, embargo)</li>
+              <li>Mogok kerja atau perselisihan industrial</li>
+            </ul>
+            <p className="text-gray-700 mt-3 text-sm">
+              Dalam keadaan force majeure, kami akan memberitahu Anda sesegera mungkin dan
+              berupaya untuk meminimalkan dampak pada layanan.
+            </p>
+          </div>
+        </section>
+
+        {/* Account & User Content - NEW */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            15. Akun Pengguna & Konten
+          </h2>
+
+          <h3 className="text-xl font-semibold text-gray-800 mb-3">
+            15.1. Tanggung Jawab Akun
+          </h3>
+          <p className="text-gray-700 mb-3">
+            Jika kami menyediakan fitur akun pengguna di masa depan, Anda bertanggung jawab untuk:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700 mb-4">
+            <li>Menjaga kerahasiaan password dan informasi login</li>
+            <li>Semua aktivitas yang terjadi di bawah akun Anda</li>
+            <li>Memberitahu kami segera jika ada penggunaan tidak sah</li>
+            <li>Tidak membagikan akun dengan orang lain</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold text-gray-800 mb-3">
+            15.2. Ulasan & Rating Produk
+          </h3>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <p className="text-gray-700 mb-2">
+              Jika Anda memberikan ulasan atau rating produk:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
+              <li>Ulasan harus jujur berdasarkan pengalaman pribadi</li>
+              <li>Tidak mengandung konten ilegal, cabul, atau menyinggung</li>
+              <li>Tidak mengandung informasi pribadi pihak ketiga</li>
+              <li>Tidak mengandung spam atau promosi kompetitor</li>
+              <li>Kami berhak menghapus ulasan yang melanggar ketentuan</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Warranty Disclaimer - NEW */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            16. Penolakan Jaminan
+          </h2>
+          <div className="bg-red-50 border-l-4 border-red-500 p-4">
+            <p className="text-gray-700 mb-3 font-semibold">
+              ⚠️ PENTING - HARAP DIBACA:
+            </p>
+            <p className="text-gray-700 mb-3">
+              Layanan kami disediakan "SEBAGAIMANA ADANYA" dan "SEBAGAIMANA TERSEDIA" tanpa
+              jaminan dalam bentuk apa pun, baik tersurat maupun tersirat, termasuk namun
+              tidak terbatas pada:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
+              <li>Jaminan kelayakan untuk diperdagangkan</li>
+              <li>Jaminan kesesuaian untuk tujuan tertentu</li>
+              <li>Jaminan tidak melanggar hak pihak ketiga</li>
+              <li>Jaminan keakuratan, kelengkapan, atau keandalan konten</li>
+              <li>Jaminan bahwa layanan akan bebas dari error atau virus</li>
+            </ul>
+            <p className="text-gray-700 mt-3 text-sm">
+              Anda menggunakan layanan kami atas risiko Anda sendiri.
+            </p>
+          </div>
+        </section>
+
+        {/* Limitation of Liability - ENHANCED */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            17. Batasan Tanggung Jawab (Lanjutan)
+          </h2>
+          <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-4">
+            <p className="text-gray-700 mb-3 font-semibold">
+              Batasan Maksimum Tanggung Jawab:
+            </p>
+            <p className="text-gray-700">
+              Dalam keadaan apa pun, tanggung jawab total Sahara Mart kepada Anda untuk semua
+              klaim yang timbul dari atau terkait dengan penggunaan layanan kami tidak akan
+              melebihi jumlah yang lebih besar dari:
+            </p>
+            <ol className="list-decimal pl-6 mt-2 space-y-1 text-gray-700">
+              <li>Nilai total transaksi yang menyebabkan klaim</li>
+              <li>Rp 1.000.000 (satu juta rupiah)</li>
+            </ol>
+          </div>
+
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-gray-700 mb-2 font-semibold">
+              ❌ Pengecualian Tanggung Jawab:
+            </p>
+            <p className="text-gray-700 text-sm mb-2">
+              Sahara Mart TIDAK bertanggung jawab atas:
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
+              <li>Kehilangan keuntungan, pendapatan, atau data</li>
+              <li>Kerusakan tidak langsung, insidental, khusus, atau konsekuensial</li>
+              <li>Gangguan bisnis atau kehilangan reputasi</li>
+              <li>Biaya pengadaan barang atau layanan pengganti</li>
+              <li>Kegagalan untuk menyimpan atau mengirimkan data</li>
+              <li>Akses tidak sah ke data atau transmisi Anda</li>
+              <li>Pernyataan atau perilaku pihak ketiga di layanan kami</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Termination - NEW */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            18. Penghentian Akses
+          </h2>
+
+          <h3 className="text-xl font-semibold text-gray-800 mb-3">
+            18.1. Hak Kami untuk Menghentikan
+          </h3>
+          <p className="text-gray-700 mb-3">
+            Kami berhak untuk menangguhkan atau menghentikan akses Anda ke layanan kami,
+            dengan atau tanpa pemberitahuan, jika:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <li>Anda melanggar Syarat & Ketentuan ini</li>
+            <li>Kami mencurigai aktivitas penipuan atau ilegal</li>
+            <li>Atas permintaan penegak hukum atau otoritas pemerintah</li>
+            <li>Untuk melindungi keamanan atau integritas layanan kami</li>
+            <li>Untuk alasan bisnis yang sah (termasuk penghentian layanan)</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-6">
+            18.2. Efek Penghentian
+          </h3>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <p className="text-gray-700 text-sm">
+              Setelah penghentian akses:
+            </p>
+            <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-700 text-sm">
+              <li>Hak Anda untuk menggunakan layanan segera berakhir</li>
+              <li>Pesanan yang sedang diproses akan diselesaikan atau dibatalkan</li>
+              <li>Anda tetap bertanggung jawab atas kewajiban yang timbul sebelum penghentian</li>
+              <li>Ketentuan yang secara alami harus berlanjut akan tetap berlaku</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Entire Agreement - NEW */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            19. Keseluruhan Perjanjian
+          </h2>
+          <p className="text-gray-700">
+            Syarat & Ketentuan ini, bersama dengan Kebijakan Privasi kami, merupakan keseluruhan
+            perjanjian antara Anda dan Sahara Mart mengenai penggunaan layanan kami, dan
+            menggantikan semua perjanjian, komunikasi, atau pemahaman sebelumnya, baik lisan
+            maupun tertulis.
+          </p>
+          <p className="text-gray-700 mt-3">
+            Kegagalan kami untuk menegakkan hak atau ketentuan mana pun dari Syarat & Ketentuan
+            ini tidak akan dianggap sebagai pengesampingan hak atau ketentuan tersebut.
+          </p>
+        </section>
+
         {/* Kontak */}
         <section className="bg-red-50 border-2 border-red-200 rounded-xl p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-4 mt-0">
-            12. Hubungi Kami
+            20. Hubungi Kami
           </h2>
           <p className="text-gray-700 mb-4">
             Pertanyaan tentang Syarat & Ketentuan? Hubungi kami:
@@ -332,6 +545,39 @@ export default function TermsOfService() {
           </div>
         </section>
 
+        {/* Summary Box */}
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-300 rounded-xl p-6">
+          <h3 className="text-xl font-bold text-gray-800 mb-4">
+            📋 Ringkasan Poin Penting
+          </h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <h4 className="font-semibold text-gray-800 mb-2">✅ Hak Anda:</h4>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li>• Pengembalian dalam 7 hari</li>
+                <li>• Refund untuk produk rusak</li>
+                <li>• Privasi data terlindungi</li>
+                <li>• Pembatalan pesanan sebelum diproses</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-800 mb-2">⚠️ Tanggung Jawab Anda:</h4>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li>• Informasi akurat saat pemesanan</li>
+                <li>• Pembayaran tepat waktu</li>
+                <li>• Cek kondisi paket saat terima</li>
+                <li>• Patuhi aturan penggunaan layanan</li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-4 pt-4 border-t border-green-200">
+            <p className="text-sm text-gray-700 text-center">
+              <strong>Penting:</strong> Dokumen ini memiliki kekuatan hukum yang mengikat.
+              Harap simpan salinan untuk referensi Anda.
+            </p>
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="bg-gray-100 rounded-lg p-6 text-center">
           <p className="text-sm text-gray-600 font-semibold">
@@ -339,7 +585,13 @@ export default function TermsOfService() {
             dan menyetujui Syarat & Ketentuan ini.
           </p>
           <p className="text-xs text-gray-500 mt-3">
-            © 2026 Sahara Mart. All Rights Reserved.
+            © 2026 Sahara Mart. All Rights Reserved. | Dokumen Terakhir Diperbarui: 16 Januari 2026
+          </p>
+          <p className="text-xs text-gray-500 mt-2">
+            Lihat juga:{' '}
+            <a href="/privacy" className="text-blue-600 hover:underline">Kebijakan Privasi</a>
+            {' | '}
+            <a href="/faq" className="text-blue-600 hover:underline">FAQ</a>
           </p>
         </div>
       </div>
