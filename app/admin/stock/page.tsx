@@ -363,7 +363,7 @@ export default function StockManagementPage() {
                   min="1"
                   value={quantityToAdd}
                   onChange={(e) => setQuantityToAdd(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 bg-white placeholder:text-gray-500"
                   placeholder="Masukkan jumlah"
                 />
               </div>
@@ -375,14 +375,14 @@ export default function StockManagementPage() {
                 <select
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 bg-white"
                 >
-                  <option value="">Pilih alasan</option>
-                  <option value="Restock bulanan">Restock bulanan</option>
-                  <option value="Restock mingguan">Restock mingguan</option>
-                  <option value="Pembelian supplier">Pembelian supplier</option>
-                  <option value="Koreksi stok">Koreksi stok</option>
-                  <option value="Lainnya">Lainnya</option>
+                  <option value="" className="text-gray-500">Pilih alasan</option>
+                  <option value="Restock bulanan" className="text-gray-900">Restock bulanan</option>
+                  <option value="Restock mingguan" className="text-gray-900">Restock mingguan</option>
+                  <option value="Pembelian supplier" className="text-gray-900">Pembelian supplier</option>
+                  <option value="Koreksi stok" className="text-gray-900">Koreksi stok</option>
+                  <option value="Lainnya" className="text-gray-900">Lainnya</option>
                 </select>
               </div>
 
@@ -394,7 +394,7 @@ export default function StockManagementPage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent resize-none text-gray-900 bg-white placeholder:text-gray-500"
                   placeholder="Tambahkan catatan jika perlu"
                 />
               </div>
