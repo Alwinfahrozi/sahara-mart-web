@@ -10,15 +10,17 @@ Untuk memperbaiki **Bug #8: Log aktivitas stok tidak tercatat**, Anda HARUS menj
 
 ### 1. ✅ WAJIB: Create Stock Logs Table
 
-**File:** `database/create_stock_logs_table.sql`
+**File:** `database/create_stock_logs_table_FIXED.sql` ⭐ **USE THIS (FIXED VERSION)**
 
 **Kapan:** SEBELUM menggunakan fitur stock management
+
+**⚠️ IMPORTANT:** Gunakan file `create_stock_logs_table_FIXED.sql` (bukan yang lama) karena sudah compatible dengan products table yang menggunakan INTEGER ID.
 
 **Cara:**
 1. Login ke Supabase Dashboard: https://drlbfzwuluxhkkltcjpk.supabase.co
 2. Klik "SQL Editor" di sidebar kiri
 3. Klik "New query"
-4. Buka file `database/create_stock_logs_table.sql`
+4. Buka file `database/create_stock_logs_table_FIXED.sql` ⭐
 5. Copy SEMUA isi file
 6. Paste ke SQL Editor
 7. Klik "RUN" (tombol hijau)
@@ -67,8 +69,12 @@ Untuk memperbaiki **Bug #8: Log aktivitas stok tidak tercatat**, Anda HARUS menj
 
 ## 🐛 Troubleshooting
 
+### Error: "foreign key constraint ... incompatible types: uuid and integer"
+**Penyebab:** File SQL lama menggunakan UUID tapi products table pakai INTEGER
+**Solusi:** Gunakan file FIXED version: `database/create_stock_logs_table_FIXED.sql` ⭐
+
 ### Error: "relation stock_logs does not exist"
-**Solusi:** Belum run SQL script. Run `database/create_stock_logs_table.sql`
+**Solusi:** Belum run SQL script. Run `database/create_stock_logs_table_FIXED.sql`
 
 ### Error: "permission denied for table stock_logs"
 **Solusi:** RLS policies belum di-setup. Re-run SQL script lengkap.
