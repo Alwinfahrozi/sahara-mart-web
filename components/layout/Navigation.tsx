@@ -14,7 +14,7 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-white border-t sticky top-0 z-40 shadow-sm">
+    <nav className="bg-white border-t shadow-sm">
       <div className="container mx-auto px-2 md:px-4">
         {/* Mobile: Horizontal Scrollable Menu */}
         <div className="md:hidden overflow-x-auto scrollbar-hide">
