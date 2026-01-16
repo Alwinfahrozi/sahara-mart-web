@@ -129,19 +129,19 @@ export default function HomePage() {
       <section className="bg-[#F3F4F6] py-8 md:py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-gray-800">Kategori Produk</h2>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-6">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-6">
             {categories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <Link
                   key={category.id}
                   href="/katalog"
-                  className="bg-white p-4 md:p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group text-center"
+                  className="bg-white p-2 md:p-6 rounded-lg md:rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group text-center"
                 >
-                  <div className="flex justify-center mb-2 md:mb-3 text-gray-700 group-hover:text-[#E60000] transition-colors">
-                    <IconComponent className="w-12 h-12 md:w-16 md:h-16 group-hover:scale-110 transition-transform" />
+                  <div className="flex justify-center mb-1 md:mb-3 text-gray-700 group-hover:text-[#E60000] transition-colors">
+                    <IconComponent className="w-8 h-8 md:w-16 md:h-16 group-hover:scale-110 transition-transform" />
                   </div>
-                  <p className="font-semibold text-gray-700 text-xs md:text-base">{category.name}</p>
+                  <p className="font-semibold text-gray-700 text-[10px] md:text-base leading-tight">{category.name}</p>
                 </Link>
               );
             })}
