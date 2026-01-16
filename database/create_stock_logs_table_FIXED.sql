@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS public.stock_logs (
   reason TEXT,
   notes TEXT,
   performed_by UUID REFERENCES auth.users(id),
-  order_id UUID REFERENCES public.orders(id) ON DELETE SET NULL,
+  order_id INTEGER, -- Nullable, no FK constraint (orders table schema varies)
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

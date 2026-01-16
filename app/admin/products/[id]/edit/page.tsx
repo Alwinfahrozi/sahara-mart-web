@@ -366,8 +366,8 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
           <div className="md:col-span-2">
             <ImageUpload
               currentImageUrl={formData.image_url}
-              onImageUpload={(url) => setFormData({ ...formData, image_url: url })}
-              onImageRemove={() => setFormData({ ...formData, image_url: '' })}
+              onImageUpload={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+              onImageRemove={() => setFormData(prev => ({ ...prev, image_url: '' }))}
             />
           </div>
 
