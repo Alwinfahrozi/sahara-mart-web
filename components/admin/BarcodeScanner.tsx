@@ -7,17 +7,30 @@ type BarcodeScannerProps = {
   onScan: (barcode: string) => void;
   placeholder?: string;
   autoFocus?: boolean;
+  onChange?: (value: string) => void; // Live search support
+  value?: string; // Controlled input
 };
 
 export default function BarcodeScanner({
   onScan,
   placeholder = 'Scan barcode atau ketik manual...',
   autoFocus = false,
+  onChange,
+  value,
 }: BarcodeScannerProps) {
-  const [inputValue, setInputValue] = useState('');
+  const [internalValue, setInternalValue] = useState('');
   const [isScanning, setIsScanning] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const scanTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  // Use controlled value if provided, otherwise use internal state
+  const inputValue = value !== undefined ? value : internalValue;
+  const setInputValue = (val: string) => {
+    if (value === undefined) {
+      setInternalValue(val);
+    }
+    onChange?.(val); // Call onChange for live search
+  };
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {
@@ -28,8 +41,8 @@ export default function BarcodeScanner({
   // Handle barcode scanner input
   // Barcode scanners typically type very fast and end with Enter
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
+    const val = e.target.value;
+    setInputValue(val);
 
     // Clear previous timeout
     if (scanTimeoutRef.current) {
@@ -55,7 +68,10 @@ export default function BarcodeScanner({
     const barcode = inputValue.trim();
     if (barcode) {
       onScan(barcode);
-      setInputValue('');
+      // Don't clear if using controlled value
+      if (value === undefined) {
+        setInputValue('');
+      }
       setIsScanning(false);
       inputRef.current?.focus();
     }

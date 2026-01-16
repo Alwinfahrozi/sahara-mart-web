@@ -149,7 +149,7 @@ export default function AdminProductsPage() {
         </div>
       </div>
 
-      {/* Barcode Scanner Section */}
+      {/* Search & Barcode Scanner Section */}
       <div className="mb-6 bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl p-6 shadow-sm">
         <div className="mb-3">
           <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
@@ -158,30 +158,19 @@ export default function AdminProductsPage() {
           <p className="text-sm text-gray-600">Cari produk dengan cepat menggunakan barcode scanner</p>
         </div>
         <BarcodeScanner
+          value={searchTerm}
+          onChange={(value) => setSearchTerm(value)}
           onScan={(barcode) => {
-            setSearchTerm(barcode);
-            toast.success(`Mencari produk dengan barcode: ${barcode}`);
+            toast.success(`Scan berhasil: ${barcode}`);
           }}
-          placeholder="Scan barcode atau ketik manual..."
+          placeholder="Scan dengan barcode scanner atau ketik nama produk, SKU, barcode..."
           autoFocus={false}
         />
       </div>
 
       {/* Filters Section */}
       <div className="mb-6 flex flex-col md:flex-row gap-4">
-        {/* Search Bar */}
-        <div className="flex-1 relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search size={18} className="text-gray-400" />
-          </div>
-          <input
-  type="text"
-  placeholder="Cari nama produk, SKU, atau barcode..."
-  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-900 placeholder:text-gray-400"
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/>
-        </div>
+        {/* Category Filter (Search bar removed - sudah ada di barcode scanner) */}
 
         {/* Category Filter */}
         <div className="relative min-w-[200px]">
