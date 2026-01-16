@@ -12,10 +12,14 @@ const BUCKET_NAME = 'product-images';
 // ============================================================
 export async function uploadProductImage(file: File): Promise<{ url: string; path: string } | null> {
   try {
+    console.log('Starting image upload:', file.name, file.type, file.size);
+
     // Generate unique filename
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
     const filePath = `products/${fileName}`;
+
+    console.log('Upload path:', filePath);
 
     // Upload file
     const { data, error } = await supabase.storage
@@ -26,22 +30,28 @@ export async function uploadProductImage(file: File): Promise<{ url: string; pat
       });
 
     if (error) {
-      console.error('Upload error:', error);
-      return null;
+      console.error('❌ Upload error:', error);
+      console.error('Error details:', JSON.stringify(error, null, 2));
+      throw new Error(`Upload failed: ${error.message}`);
     }
+
+    console.log('✅ Upload successful:', data);
 
     // Get public URL
     const { data: { publicUrl } } = supabase.storage
       .from(BUCKET_NAME)
       .getPublicUrl(filePath);
 
+    console.log('✅ Public URL:', publicUrl);
+
     return {
       url: publicUrl,
       path: filePath,
     };
-  } catch (error) {
-    console.error('Upload exception:', error);
-    return null;
+  } catch (error: any) {
+    console.error('❌ Upload exception:', error);
+    console.error('Error message:', error?.message);
+    throw error; // Re-throw untuk ditangkap oleh komponen
   }
 }
 

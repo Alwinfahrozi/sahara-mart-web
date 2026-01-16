@@ -74,7 +74,7 @@ export default function ImageUpload({
       const result = await uploadProductImage(file);
 
       if (!result) {
-        throw new Error('Upload failed');
+        throw new Error('Upload failed - no result returned');
       }
 
       // Update preview and parent component
@@ -82,9 +82,18 @@ export default function ImageUpload({
       onImageUpload(result.url);
 
       toast.success('Gambar berhasil diupload!', { id: 'upload' });
-    } catch (error) {
-      console.error('Upload error:', error);
-      toast.error('Gagal upload gambar', { id: 'upload' });
+    } catch (error: any) {
+      console.error('❌ Upload error:', error);
+      const errorMsg = error?.message || 'Gagal upload gambar';
+
+      // Show detailed error untuk debugging
+      if (errorMsg.includes('not found') || errorMsg.includes('does not exist')) {
+        toast.error('Bucket "product-images" belum dibuat di Supabase Storage!', { id: 'upload', duration: 5000 });
+      } else if (errorMsg.includes('permission') || errorMsg.includes('policy')) {
+        toast.error('RLS policy belum di-setup! Cek SUPABASE_STORAGE_SETUP.md', { id: 'upload', duration: 5000 });
+      } else {
+        toast.error(`Upload gagal: ${errorMsg}`, { id: 'upload', duration: 5000 });
+      }
     } finally {
       setUploading(false);
     }
