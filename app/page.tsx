@@ -1,7 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, MapPin, TrendingUp, Clock, Award, ShoppingCart } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  TrendingUp,
+  Clock,
+  Award,
+  ShoppingCart,
+  Wheat,
+  Milk,
+  Cookie,
+  Home,
+  Salad,
+  Coffee
+} from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import ProductCardSkeleton from '@/components/ProductCardSkeleton';
@@ -14,12 +28,12 @@ const promos = [
 ];
 
 const categories = [
-  { id: 1, name: 'Sembako', icon: '🌾' },
-  { id: 2, name: 'Susu & Roti', icon: '🥛' },
-  { id: 3, name: 'Snack', icon: '🍪' },
-  { id: 4, name: 'Kebutuhan Rumah', icon: '🏠' },
-  { id: 5, name: 'Sayuran & Buah', icon: '🥬' },
-  { id: 6, name: 'Minuman', icon: '🥤' },
+  { id: 1, name: 'Sembako', icon: Wheat },
+  { id: 2, name: 'Susu & Roti', icon: Milk },
+  { id: 3, name: 'Snack', icon: Cookie },
+  { id: 4, name: 'Kebutuhan Rumah', icon: Home },
+  { id: 5, name: 'Sayuran & Buah', icon: Salad },
+  { id: 6, name: 'Minuman', icon: Coffee },
 ];
 
 export default function HomePage() {
@@ -116,16 +130,21 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-gray-800">Kategori Produk</h2>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-6">
-            {categories.map((category) => (
-              <Link
-                key={category.id}
-                href="/katalog"
-                className="bg-white p-4 md:p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group text-center"
-              >
-                <div className="text-4xl md:text-5xl mb-2 md:mb-3 group-hover:scale-110 transition-transform">{category.icon}</div>
-                <p className="font-semibold text-gray-700 text-xs md:text-base">{category.name}</p>
-              </Link>
-            ))}
+            {categories.map((category) => {
+              const IconComponent = category.icon;
+              return (
+                <Link
+                  key={category.id}
+                  href="/katalog"
+                  className="bg-white p-4 md:p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group text-center"
+                >
+                  <div className="flex justify-center mb-2 md:mb-3 text-gray-700 group-hover:text-[#E60000] transition-colors">
+                    <IconComponent className="w-12 h-12 md:w-16 md:h-16 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <p className="font-semibold text-gray-700 text-xs md:text-base">{category.name}</p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
