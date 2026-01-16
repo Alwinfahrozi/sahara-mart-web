@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
       `)
       .lte('stock', 5)
       .gt('stock', 0)
+      .limit(10000)
       .order('stock', { ascending: true });
 
     if (lowStockError) {
@@ -54,6 +55,7 @@ export async function GET(request: NextRequest) {
         )
       `)
       .eq('stock', 0)
+      .limit(10000)
       .order('name', { ascending: true });
 
     if (outOfStockError) {

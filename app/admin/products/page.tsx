@@ -51,8 +51,8 @@ export default function AdminProductsPage() {
         setLoading(true);
         setError(null);
         
-        // Fetch products (limit 100 untuk MVP)
-        const productsRes = await fetch('/api/products?limit=100');
+        // Fetch all products (limit 10000 to handle large inventory)
+        const productsRes = await fetch('/api/products?limit=10000');
         if (!productsRes.ok) throw new Error('Gagal memuat produk');
         const productsData = await productsRes.json();
         
