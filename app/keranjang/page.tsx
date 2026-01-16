@@ -18,22 +18,93 @@ export default function CartPage() {
   const [customerAddress, setCustomerAddress] = useState('');
   const [customerNotes, setCustomerNotes] = useState('');
 
+  // Validation error states
+  const [nameError, setNameError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [addressError, setAddressError] = useState('');
+
+  // Validate name (minimal 3 karakter, hanya huruf dan spasi)
+  const validateName = (name: string): boolean => {
+    setNameError('');
+
+    if (!name.trim()) {
+      setNameError('Nama harus diisi');
+      return false;
+    }
+
+    if (name.trim().length < 3) {
+      setNameError('Nama minimal 3 karakter');
+      return false;
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(name)) {
+      setNameError('Nama hanya boleh berisi huruf dan spasi');
+      return false;
+    }
+
+    return true;
+  };
+
+  // Validate phone (format 08xx atau 62xx, minimal 10 digit)
+  const validatePhone = (phone: string): boolean => {
+    setPhoneError('');
+
+    if (!phone.trim()) {
+      setPhoneError('Nomor WhatsApp harus diisi');
+      return false;
+    }
+
+    // Remove spaces and dashes
+    const cleanPhone = phone.replace(/[\s-]/g, '');
+
+    // Check if only numbers
+    if (!/^\d+$/.test(cleanPhone)) {
+      setPhoneError('Nomor WhatsApp hanya boleh berisi angka');
+      return false;
+    }
+
+    // Check format 08xx or 62xx
+    if (!cleanPhone.startsWith('08') && !cleanPhone.startsWith('62')) {
+      setPhoneError('Nomor WhatsApp harus diawali 08 atau 62');
+      return false;
+    }
+
+    // Check length (minimal 10 digit, maksimal 15 digit)
+    if (cleanPhone.length < 10 || cleanPhone.length > 15) {
+      setPhoneError('Nomor WhatsApp harus 10-15 digit');
+      return false;
+    }
+
+    return true;
+  };
+
+  // Validate address (minimal 10 karakter)
+  const validateAddress = (address: string): boolean => {
+    setAddressError('');
+
+    if (!address.trim()) {
+      setAddressError('Alamat pengiriman harus diisi');
+      return false;
+    }
+
+    if (address.trim().length < 10) {
+      setAddressError('Alamat minimal 10 karakter');
+      return false;
+    }
+
+    return true;
+  };
+
   const handleWhatsAppCheckout = async () => {
     if (items.length === 0) return;
 
-    // Validate customer information
-    if (!customerName.trim()) {
-      toast.error('Mohon isi nama Anda');
-      return;
-    }
+    // Validate all fields
+    const isNameValid = validateName(customerName);
+    const isPhoneValid = validatePhone(customerPhone);
+    const isAddressValid = validateAddress(customerAddress);
 
-    if (!customerPhone.trim()) {
-      toast.error('Mohon isi nomor WhatsApp Anda');
-      return;
-    }
-
-    if (!customerAddress.trim()) {
-      toast.error('Mohon isi alamat pengiriman');
+    if (!isNameValid || !isPhoneValid || !isAddressValid) {
+      toast.error('Mohon perbaiki data yang tidak valid');
       return;
     }
 
@@ -322,10 +393,19 @@ export default function CartPage() {
                     type="text"
                     placeholder="Masukkan nama lengkap Anda"
                     value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                    onChange={(e) => {
+                      setCustomerName(e.target.value);
+                      setNameError('');
+                    }}
+                    onBlur={() => validateName(customerName)}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      nameError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {nameError && (
+                    <p className="text-xs text-red-600 mt-1">{nameError}</p>
+                  )}
                 </div>
 
                 <div>
@@ -337,11 +417,21 @@ export default function CartPage() {
                     type="tel"
                     placeholder="Contoh: 081234567890"
                     value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                    onChange={(e) => {
+                      setCustomerPhone(e.target.value);
+                      setPhoneError('');
+                    }}
+                    onBlur={() => validatePhone(customerPhone)}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 placeholder:text-gray-400 ${
+                      phoneError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
-                  <p className="text-xs text-gray-500 mt-1">Format: 08xx atau 62xx</p>
+                  {phoneError ? (
+                    <p className="text-xs text-red-600 mt-1">{phoneError}</p>
+                  ) : (
+                    <p className="text-xs text-gray-500 mt-1">Format: 08xx atau 62xx</p>
+                  )}
                 </div>
 
                 <div>
@@ -352,11 +442,20 @@ export default function CartPage() {
                   <textarea
                     placeholder="Masukkan alamat lengkap untuk pengiriman"
                     value={customerAddress}
-                    onChange={(e) => setCustomerAddress(e.target.value)}
+                    onChange={(e) => {
+                      setCustomerAddress(e.target.value);
+                      setAddressError('');
+                    }}
+                    onBlur={() => validateAddress(customerAddress)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 placeholder:text-gray-400 resize-none"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-transparent text-gray-900 placeholder:text-gray-400 resize-none ${
+                      addressError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {addressError && (
+                    <p className="text-xs text-red-600 mt-1">{addressError}</p>
+                  )}
                 </div>
 
                 <div>
