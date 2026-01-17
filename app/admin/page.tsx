@@ -109,16 +109,25 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetch on mount
     fetchAllStats();
+
+    // Auto-refresh every 5 minutes
+    const interval = setInterval(fetchAllStats, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   async function fetchAllStats() {
     try {
+      console.log('🔄 Fetching dashboard stats...');
+      setLoading(true);
+
       // Fetch product stats
       await fetchProductStats();
 
-      // Fetch sales analytics
-      await Promise.all([
+      // Fetch sales analytics in parallel
+      const results = await Promise.allSettled([
         fetchTodayStats(),
         fetchWeekStats(),
         fetchMonthStats(),
@@ -126,8 +135,17 @@ export default function AdminDashboard() {
         fetchCategoryData(),
         fetchDailyData(),
       ]);
+
+      // Log any failures
+      results.forEach((result, index) => {
+        if (result.status === 'rejected') {
+          console.error(`❌ Failed to fetch stat ${index}:`, result.reason);
+        }
+      });
+
+      console.log('✅ Dashboard stats loaded');
     } catch (error) {
-      console.error('Error fetching stats:', error);
+      console.error('❌ Error fetching stats:', error);
     } finally {
       setLoading(false);
     }
