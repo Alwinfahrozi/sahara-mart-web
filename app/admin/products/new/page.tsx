@@ -28,6 +28,7 @@ export default function NewProductPage() {
     stock: '',
     weight: '',
     sku: '',
+    barcode: '',
     description: '',
     image_url: '',
     is_featured: false,
@@ -62,6 +63,7 @@ export default function NewProductPage() {
         stock: parseInt(formData.stock),
         weight: formData.weight,
         sku: formData.sku || null,
+        barcode: formData.barcode || null,
         description: formData.description || '',
         image_url: formData.image_url || null,
         is_featured: formData.is_featured,
@@ -174,6 +176,21 @@ export default function NewProductPage() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-[#E60000] outline-none text-gray-900 placeholder:text-gray-400"
               placeholder="Contoh: BRS-001"
+            />
+          </div>
+
+          {/* Barcode */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Barcode Produk
+            </label>
+            <input
+              type="text"
+              name="barcode"
+              value={formData.barcode}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E60000] focus:border-[#E60000] outline-none text-gray-900 placeholder:text-gray-400 font-mono"
+              placeholder="8992753140109"
             />
           </div>
 
