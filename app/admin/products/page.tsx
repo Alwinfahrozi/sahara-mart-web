@@ -35,24 +35,43 @@ export default function AdminProductsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
+
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const itemsPerPage = 50;
 
-  // Fetch products & categories
+  // Fetch products with server-side pagination
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
         setError(null);
 
-        // Fetch all products (limit 10000 to handle large inventory)
-        const productsRes = await fetch('/api/products?limit=10000');
+        // Build query params for server-side filtering
+        const params = new URLSearchParams();
+        params.append('page', currentPage.toString());
+        params.append('limit', itemsPerPage.toString());
+
+        if (searchTerm) {
+          params.append('search', searchTerm);
+        }
+
+        if (selectedCategory !== 'all') {
+          // Get category slug from categories array
+          const category = categories.find(c => c.id === parseInt(selectedCategory));
+          if (category) {
+            params.append('category', category.slug);
+          }
+        }
+
+        // Fetch products with pagination
+        const productsRes = await fetch(`/api/products?${params.toString()}`);
         if (!productsRes.ok) throw new Error('Gagal memuat produk');
         const productsData = await productsRes.json();
 
@@ -60,13 +79,9 @@ export default function AdminProductsPage() {
           setProducts(productsData.data);
         }
 
-        // Fetch categories from API
-        const categoriesRes = await fetch('/api/categories');
-        if (categoriesRes.ok) {
-          const categoriesData = await categoriesRes.json();
-          if (categoriesData.categories) {
-            setCategories(categoriesData.categories);
-          }
+        if (productsData.pagination) {
+          setTotalProducts(productsData.pagination.total);
+          setTotalPages(productsData.pagination.totalPages);
         }
 
       } catch (err) {
@@ -76,29 +91,30 @@ export default function AdminProductsPage() {
         setLoading(false);
       }
     }
-    fetchData();
+
+    // Only fetch if categories loaded (for category filter)
+    if (categories.length > 0 || selectedCategory === 'all') {
+      fetchData();
+    }
+  }, [currentPage, searchTerm, selectedCategory, categories]);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const categoriesRes = await fetch('/api/categories');
+        if (categoriesRes.ok) {
+          const categoriesData = await categoriesRes.json();
+          if (categoriesData.categories) {
+            setCategories(categoriesData.categories);
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching categories:', err);
+      }
+    }
+    fetchCategories();
   }, []);
-
-  // Filter logic
-  const filteredProducts = products.filter((product) => {
-    // Search filter
-    const matchesSearch = 
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.sku?.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    // Category filter
-    const matchesCategory = 
-      selectedCategory === 'all' || 
-      product.category_id === parseInt(selectedCategory);
-    
-    return matchesSearch && matchesCategory;
-  });
-
-  // Pagination logic
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
   // Reset to page 1 when filters change
   useEffect(() => {
@@ -126,7 +142,7 @@ export default function AdminProductsPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-800">Daftar Produk</h1>
           <p className="text-sm text-gray-500">
-            Kelola inventaris Sahara Mart ({filteredProducts.length} produk)
+            Kelola inventaris Sahara Mart ({totalProducts.toLocaleString()} produk)
           </p>
         </div>
         <div className="flex gap-3">
@@ -197,7 +213,7 @@ export default function AdminProductsPage() {
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-[#E60000]"></div>
             <p className="mt-4 text-gray-500">Memuat data produk...</p>
           </div>
-        ) : paginatedProducts.length === 0 ? (
+        ) : products.length === 0 ? (
           // Empty State
           <div className="p-12 text-center text-gray-500">
             <div className="text-6xl mb-4">📦</div>
@@ -229,7 +245,7 @@ export default function AdminProductsPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {paginatedProducts.map((product) => (
+                  {products.map((product) => (
                     <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                       {/* Kolom Produk */}
                       <td className="px-6 py-4">
@@ -319,7 +335,7 @@ export default function AdminProductsPage() {
             {totalPages > 1 && (
               <div className="border-t border-gray-100 px-6 py-4 flex items-center justify-between">
                 <div className="text-sm text-gray-500">
-                  Menampilkan {startIndex + 1}-{Math.min(endIndex, filteredProducts.length)} dari {filteredProducts.length} produk
+                  Halaman {currentPage} dari {totalPages} • Total {totalProducts.toLocaleString()} produk
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -329,11 +345,11 @@ export default function AdminProductsPage() {
                   >
                     <ChevronLeft size={18} />
                   </button>
-                  
+
                   <span className="text-sm text-gray-600">
                     Halaman {currentPage} dari {totalPages}
                   </span>
-                  
+
                   <button
                     onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                     disabled={currentPage === totalPages}
