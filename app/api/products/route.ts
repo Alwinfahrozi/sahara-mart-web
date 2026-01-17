@@ -30,13 +30,15 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get('category');
   const search = searchParams.get('search');
   const featured = searchParams.get('featured') === 'true';
-  
+  const minPrice = searchParams.get('minPrice');
+  const maxPrice = searchParams.get('maxPrice');
+
   // Build query
   let query = supabase
     .from('products')
     .select('*, categories(id, name, slug, icon)', { count: 'exact' })
     .eq('is_active', true);
-  
+
   // Apply filters
   if (category) {
     const { data: cat } = await supabase
@@ -44,19 +46,28 @@ export async function GET(request: NextRequest) {
       .select('id')
       .eq('slug', category)
       .single();
-    
+
     if (cat) {
       query = query.eq('category_id', cat.id);
     }
   }
-  
+
   if (search) {
     // Search in name, SKU, barcode, and description
     query = query.or(`name.ilike.%${search}%,sku.ilike.%${search}%,barcode.ilike.%${search}%,description.ilike.%${search}%`);
   }
-  
+
   if (featured) {
     query = query.eq('is_featured', true);
+  }
+
+  // Price range filters
+  if (minPrice) {
+    query = query.gte('price', parseInt(minPrice));
+  }
+
+  if (maxPrice) {
+    query = query.lte('price', parseInt(maxPrice));
   }
   
   // Pagination

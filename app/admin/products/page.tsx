@@ -50,26 +50,24 @@ export default function AdminProductsPage() {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Fetch all products (limit 10000 to handle large inventory)
         const productsRes = await fetch('/api/products?limit=10000');
         if (!productsRes.ok) throw new Error('Gagal memuat produk');
         const productsData = await productsRes.json();
-        
+
         if (productsData.data) {
           setProducts(productsData.data);
         }
 
-        // Fetch categories (hardcoded dulu karena /api/categories belum ada - BUG-003)
-        // Nanti bisa diganti dengan fetch('/api/categories') setelah endpoint dibuat
-        setCategories([
-          { id: 1, name: 'Sembako', slug: 'sembako' },
-          { id: 2, name: 'Susu & Bayi', slug: 'susu-bayi' },
-          { id: 3, name: 'Snack & Makanan', slug: 'snack-makanan' },
-          { id: 4, name: 'Kebutuhan Rumah', slug: 'kebutuhan-rumah' },
-          { id: 5, name: 'Sayuran & Buah', slug: 'sayuran-buah' },
-          { id: 6, name: 'Minuman', slug: 'minuman' },
-        ]);
+        // Fetch categories from API
+        const categoriesRes = await fetch('/api/categories');
+        if (categoriesRes.ok) {
+          const categoriesData = await categoriesRes.json();
+          if (categoriesData.categories) {
+            setCategories(categoriesData.categories);
+          }
+        }
 
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Terjadi kesalahan');
