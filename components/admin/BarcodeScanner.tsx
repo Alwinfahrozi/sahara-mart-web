@@ -99,7 +99,7 @@ export default function BarcodeScanner({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:border-[#E60000] focus:ring-1 focus:ring-[#E60000] transition-all outline-none"
+          className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:border-[#E60000] focus:ring-1 focus:ring-[#E60000] transition-all outline-none text-gray-900"
         />
 
         {/* Clear Button */}
