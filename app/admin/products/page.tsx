@@ -147,28 +147,20 @@ export default function AdminProductsPage() {
         </div>
       </div>
 
-      {/* Search & Barcode Scanner Section */}
-      <div className="mb-6 bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl p-6 shadow-sm">
-        <div className="mb-3">
-          <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-            🔍 Scan Barcode
-          </h3>
-          <p className="text-sm text-gray-600">Cari produk dengan cepat menggunakan barcode scanner</p>
-        </div>
-        <BarcodeScanner
-          value={searchTerm}
-          onChange={(value) => setSearchTerm(value)}
-          onScan={(barcode) => {
-            toast.success(`Scan berhasil: ${barcode}`);
-          }}
-          placeholder="Scan dengan barcode scanner atau ketik nama produk, SKU, barcode..."
-          autoFocus={false}
-        />
-      </div>
-
-      {/* Filters Section */}
+      {/* Search & Filters Section */}
       <div className="mb-6 flex flex-col md:flex-row gap-4">
-        {/* Category Filter (Search bar removed - sudah ada di barcode scanner) */}
+        {/* Search Bar */}
+        <div className="flex-1">
+          <BarcodeScanner
+            value={searchTerm}
+            onChange={(value) => setSearchTerm(value)}
+            onScan={(barcode) => {
+              toast.success(`Scan berhasil: ${barcode}`);
+            }}
+            placeholder="Cari nama produk atau SKU"
+            autoFocus={false}
+          />
+        </div>
 
         {/* Category Filter */}
         <div className="relative min-w-[200px]">
@@ -178,7 +170,7 @@ export default function AdminProductsPage() {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all appearance-none bg-white cursor-pointer text-gray-900"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-1 focus:ring-[#E60000] focus:border-[#E60000] outline-none transition-all appearance-none bg-white cursor-pointer text-gray-900"
           >
             <option value="all">Semua Kategori</option>
             {categories.map((cat) => (
