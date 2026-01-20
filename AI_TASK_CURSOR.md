@@ -7,6 +7,352 @@
 
 ---
 
+## 📊 PROJECT STATUS CHECK (Updated: 2026-01-20)
+
+### ✅ ALREADY COMPLETED (85%) - DO NOT REBUILD!
+
+**UI Components (DONE):**
+- ✅ Product cards (`components/ProductCard.tsx`) - Working
+- ✅ Product skeleton (`components/ProductCardSkeleton.tsx`) - Implemented
+- ✅ Image upload (`components/ImageUpload.tsx`) - Drag & drop ready
+- ✅ Barcode scanner (`components/admin/BarcodeScanner.tsx`) - Functional
+- ✅ Charts (`components/charts/`) - Revenue, Orders, Category charts
+- ✅ SEO components (`components/seo/`) - Analytics + StructuredData
+- ✅ Layout (`components/layout/`) - Header, Footer, Navigation, Wrapper
+
+**Pages (DONE):**
+- ✅ Homepage (`app/page.tsx`) - Hero + featured products
+- ✅ Product catalog (`app/katalog/page.tsx`) - With filters
+- ✅ Product detail (`app/produk/[id]/page.tsx`) - Complete
+- ✅ Shopping cart (`app/keranjang/page.tsx`) - LocalStorage integrated
+- ✅ Order tracking (`app/tracking/page.tsx`) - Working
+- ✅ Admin dashboard (`app/admin/page.tsx`) - Analytics ready
+- ✅ Admin products (`app/admin/products/`) - Full CRUD UI
+- ✅ Admin orders (`app/admin/orders/`) - Management UI
+- ✅ Admin stock (`app/admin/stock/page.tsx`) - Stock management UI
+- ✅ Legal pages - Privacy, Terms, FAQ, Shipping, Returns
+
+**Styling & UX (DONE):**
+- ✅ TailwindCSS configured - Theme ready
+- ✅ Mobile responsive - Public pages optimized
+- ✅ Loading states - Skeletons implemented
+- ✅ Error boundaries - Global error handling
+- ✅ Toast notifications - react-hot-toast integrated
+
+### 🚧 REMAINING WORK (15%) - YOUR FOCUS!
+
+**What You WILL Build (Not Exist Yet):**
+1. ❌ Email notification UI - **DOES NOT EXIST**
+2. ❌ Invoice download button - **DOES NOT EXIST**
+3. ❌ Mobile admin panel optimization - **NEEDS IMPROVEMENT**
+4. ❌ Search autocomplete UI - **NOT IMPLEMENTED**
+5. ❌ Customer registration/login forms - **ADMIN ONLY currently**
+6. ❌ User profile dashboard - **NOT IMPLEMENTED**
+7. ❌ Address book UI - **NOT IMPLEMENTED**
+
+**CRITICAL VERIFICATION BEFORE CODING:**
+```typescript
+// ALWAYS check first:
+@Codebase "EmailNotificationBadge"
+// ✅ If not found → Safe to create
+
+@Codebase "InvoiceDownloadButton"
+// ✅ If not found → Safe to create
+
+@Files "components/customer/"
+// ✅ If empty → Safe to create customer components
+```
+
+**If you find existing component:**
+- 🔍 READ it carefully
+- 🎨 FOLLOW its styling patterns
+- ♻️ REUSE similar structures
+- 🚫 DON'T create duplicate
+
+---
+
+## ⚠️ CRITICAL: READ BEFORE STARTING ANY TASK
+
+### 🔍 MANDATORY CODEBASE ANALYSIS PROMPT
+
+**BEFORE creating ANY component, you MUST run this analysis:**
+
+```
+STEP 1: UNDERSTAND EXISTING UI PATTERNS
+----------------------------------------
+I need to understand the current UI/UX before building [COMPONENT_NAME].
+
+1. Analyze existing similar components:
+   @Codebase search for similar components
+   - Look in components/ for similar UI patterns
+   - Check how existing forms are structured
+   - Review current styling conventions
+   - Examine loading state implementations
+
+2. Identify integration requirements:
+   - Which API endpoints will this component call?
+     (Check API_TASK_CLAUDE.md or API_TASK_COPILOT.md)
+   - What data will I receive from backend?
+   - What props will parent components pass?
+   - What state management is needed?
+
+3. Understand data flow:
+   - User interaction → Component state → API call → Response → UI update
+   - Which part is MY responsibility?
+   - Which part is COPILOT's responsibility? (API integration)
+   - Which part is SAYA's responsibility? (backend API)
+
+4. Review design consistency:
+   - What's the current color scheme? (check existing components)
+   - What spacing/padding is used? (check Tailwind classes)
+   - What animation patterns exist? (check for transitions)
+   - What icon library is used? (lucide-react)
+
+STEP 2: MAP BACKEND DEPENDENCIES
+---------------------------------
+Before building UI, understand what data I need:
+
+Check AI_TASK_CLAUDE.md:
+- What API endpoints are SAYA building?
+- What response format will I receive?
+- What parameters do I need to send?
+
+Example:
+/*
+If building Email Notification Badge:
+
+BACKEND (SAYA builds):
+- Endpoint: GET /api/email/status
+- Response: { success: boolean, data: { sent: number, failed: number, pending: number } }
+- Authentication: Required (admin only)
+
+MY COMPONENT NEEDS:
+- State for: status, loading, error
+- Fetch on mount and every 30 seconds
+- Display: sent (green), failed (red), pending (orange)
+- Handle: loading state, error state, no data
+
+COPILOT WILL ADD:
+- Actual fetch call
+- Type definitions
+- Error handling logic
+*/
+
+STEP 3: DETECT INTEGRATION POINTS
+----------------------------------
+Map EXACTLY how my component connects to the system:
+
+1. Props I will receive:
+   - From parent components: [list props]
+   - Type definitions needed: [coordinate with Copilot]
+
+2. Data I will fetch:
+   - API endpoints: [list endpoints from SAYA's tasks]
+   - Request format: [check API documentation]
+   - Response handling: [Copilot will implement]
+
+3. Events I will emit:
+   - User actions: [onClick, onChange, onSubmit]
+   - Side effects: [what happens after user action]
+   - Parent updates: [what callbacks to call]
+
+4. State I will manage:
+   - Local state: [form inputs, UI toggles]
+   - Server state: [data from API - Copilot handles]
+   - Error state: [what to show on error]
+
+STEP 4: CHECK EXISTING PATTERNS
+--------------------------------
+Before creating, search for similar code:
+
+@Codebase "similar component pattern"
+- Is there a similar component I can reference?
+- How do other components handle loading?
+- What's the error display pattern?
+- How are forms validated?
+
+@Files app/admin/
+- Check existing admin pages for UI patterns
+- See how they structure layouts
+- Review their responsive breakpoints
+
+STEP 5: PLAN UI STRUCTURE
+--------------------------
+Sketch component hierarchy:
+
+MyNewComponent
+├─ Container (layout, spacing)
+├─ Header (title, actions)
+├─ Content
+│  ├─ Data display OR
+│  ├─ Loading skeleton OR
+│  └─ Error message
+└─ Footer (actions, pagination)
+
+Map which parts need:
+- Loading states → I create skeleton
+- Data → Copilot fetches, I display
+- Errors → Copilot catches, I show message
+- User input → I create form, Copilot handles submit
+
+STEP 6: VALIDATE UNDERSTANDING
+-------------------------------
+Before coding, ask yourself:
+
+✓ Do I know what data this component will receive?
+✓ Have I checked SAYA's API response format?
+✓ Do I understand what Copilot will integrate?
+✓ Have I reviewed similar existing components?
+✓ Do I know the current styling patterns?
+✓ Is my component truly needed or does similar exist?
+
+If NO to any → READ MORE FILES first!
+```
+
+### 📖 HOW TO USE THIS PROMPT
+
+**Example: Before Building Invoice Download Button**
+
+```tsx
+// WRONG APPROACH (Don't do this!):
+// Just start coding without understanding integration
+
+// RIGHT APPROACH:
+// 1. First, understand what SAYA is building:
+
+/*
+Check AI_TASK_CLAUDE.md → Task 1.2: Invoice PDF Generation
+
+SAYA WILL CREATE:
+- Endpoint: GET /api/invoice/[orderId]
+- Returns: PDF file as blob
+- Authentication: Admin only
+- Response headers: Content-Type: application/pdf
+
+So my button needs to:
+- Take orderId as prop
+- Show loading state while generating
+- Download blob as file
+- Handle errors (PDF generation failed)
+*/
+
+// 2. Check existing similar components:
+@Codebase "download button"
+@Files "components/admin/"
+
+/*
+Found: components/admin/BulkUploadButton.tsx
+Pattern they use:
+- useState for loading
+- async function for download
+- toast for success/error
+- disabled state during loading
+
+I should follow same pattern!
+*/
+
+// 3. Understand what Copilot will add:
+
+/*
+From AI_TASK_COPILOT.md → Task 1.2:
+
+COPILOT WILL INTEGRATE:
+- Actual fetch to /api/invoice/[orderId]
+- Blob handling and download
+- Error handling
+- Toast notifications
+
+MY COMPONENT STRUCTURE:
+- Create button UI with icons
+- Define loading/downloaded states
+- Create placeholder for onClick
+- Document expected props
+
+COPILOT FILLS IN:
+- Fetch implementation
+- File download logic
+- Error handling
+*/
+
+// 4. Now create component with full context:
+
+'use client'
+
+import { Download, Loader2, Check } from 'lucide-react'
+import { useState } from 'react'
+
+interface Props {
+  orderId: string      // From parent OrderDetailPage
+  orderNumber: string  // For filename
+}
+
+export default function InvoiceDownloadButton({ orderId, orderNumber }: Props) {
+  const [downloading, setDownloading] = useState(false)
+  const [downloaded, setDownloaded] = useState(false)
+
+  // NOTE: Copilot will implement this
+  const handleDownload = async () => {
+    // TODO: Copilot adds fetch to /api/invoice/[orderId]
+    // TODO: Copilot handles blob download
+    // TODO: Copilot shows toast on success/error
+  }
+
+  return (
+    <button
+      onClick={handleDownload}
+      disabled={downloading}
+      className="inline-flex items-center gap-2 rounded-lg border px-4 py-2
+                 hover:bg-gray-50 disabled:opacity-50 transition"
+    >
+      {/* Clear visual states for user feedback */}
+      {downloading ? (
+        <><Loader2 className="h-4 w-4 animate-spin" /> Generating...</>
+      ) : downloaded ? (
+        <><Check className="h-4 w-4 text-green-600" /> Downloaded</>
+      ) : (
+        <><Download className="h-4 w-4" /> Download Invoice</>
+      )}
+    </button>
+  )
+}
+
+// Integration is clear:
+// - Parent passes orderId + orderNumber
+// - Copilot implements handleDownload
+// - SAYA's API returns PDF
+// - User gets file download
+```
+
+### 🎯 DETECTION CHECKLIST
+
+Before creating each component, verify:
+
+**UI Pattern Understanding:**
+- [ ] I've reviewed similar existing components
+- [ ] I understand current styling conventions
+- [ ] I know the color scheme and spacing
+- [ ] I've identified reusable patterns
+
+**Backend Integration:**
+- [ ] I know which SAYA API my component will use
+- [ ] I understand the response format
+- [ ] I know what authentication is needed
+- [ ] I've defined props for data passing
+
+**Copilot Integration:**
+- [ ] I know what Copilot will implement (fetch, validation)
+- [ ] I've left clear TODOs for Copilot
+- [ ] I've defined interfaces for type safety
+- [ ] I've planned error handling points
+
+**User Experience:**
+- [ ] I've planned loading states
+- [ ] I've designed error states
+- [ ] I've considered edge cases (empty data, etc)
+- [ ] I've made it responsive
+
+---
+
 ## 🎯 PRIMARY RESPONSIBILITIES
 
 ### 1. UI Component Development

@@ -7,6 +7,257 @@
 
 ---
 
+## 📊 PROJECT STATUS CHECK (Updated: 2026-01-20)
+
+### ✅ ALREADY COMPLETED (85%) - DO NOT REBUILD!
+
+**Backend Infrastructure (DONE):**
+- ✅ All Product APIs (`app/api/products/`) - Full CRUD operational
+- ✅ Order Management APIs (`app/api/orders/`) - Complete
+- ✅ Stock Management APIs (`app/api/stock/`) - With export & notifications
+- ✅ Analytics APIs (`app/api/analytics/`) - Dashboard ready
+- ✅ Category APIs (`app/api/categories/`) - Full management
+- ✅ Image Upload API (`app/api/upload/`) - Working with Supabase Storage
+- ✅ CSRF Protection (`lib/csrf.ts`) - Active
+- ✅ Rate Limiting (`lib/rateLimiter.ts`) - Implemented
+- ✅ Supabase Integration (`lib/supabase/`) - Client + Server + Storage
+- ✅ Database types (`types/supabase.ts`) - Generated
+
+**Database Tables (DONE):**
+- ✅ products table - Complete with all fields
+- ✅ categories table - Active
+- ✅ orders table - Operational
+- ✅ order_items table - Working
+- ✅ stock_logs table - Tracking enabled
+- ✅ admin users - Auth configured
+
+**Authentication (DONE):**
+- ✅ Admin authentication via Supabase Auth
+- ✅ Protected admin routes
+- ✅ Session management
+
+### 🚧 REMAINING WORK (15%) - YOUR FOCUS!
+
+**What You WILL Build (Not Exist Yet):**
+1. ❌ Email notification system - **DOES NOT EXIST**
+2. ❌ Invoice PDF generation - **DOES NOT EXIST**
+3. ❌ Customer user accounts - **ADMIN ONLY currently**
+4. ❌ Advanced search/autocomplete - **Basic search only**
+5. ❌ Performance optimization - **NEEDS IMPROVEMENT**
+6. ❌ Caching layer - **NOT IMPLEMENTED**
+
+**CRITICAL VERIFICATION BEFORE CODING:**
+```typescript
+// ALWAYS run this check first:
+await grep('email|resend|sendgrid', { path: 'lib/' })
+// ✅ If empty → Safe to build email system
+
+await grep('invoice|pdf|jspdf', { path: 'lib/' })
+// ✅ If empty → Safe to build PDF generator
+
+await grep('customers|customer_addresses', { path: 'app/api/' })
+// ✅ If empty → Safe to build customer accounts
+```
+
+**If you find existing code:**
+- 🔍 READ it carefully
+- ♻️ REUSE existing patterns
+- 🚫 DON'T rebuild from scratch
+
+---
+
+## ⚠️ CRITICAL: READ BEFORE STARTING ANY TASK
+
+### 🔍 MANDATORY CODEBASE ANALYSIS PROMPT
+
+**BEFORE implementing ANY task, you MUST run this analysis:**
+
+```
+STEP 1: UNDERSTAND CURRENT ARCHITECTURE
+----------------------------------------
+I need to understand the existing codebase before building [FEATURE_NAME].
+
+1. Read existing related files:
+   - Check app/api/ for existing similar endpoints
+   - Review lib/ for existing utilities I can reuse
+   - Examine types/ for existing type definitions
+   - Look at components/ to understand UI integration points
+
+2. Identify integration points:
+   - Which existing API endpoints will be called?
+   - Which database tables are involved?
+   - Which components will consume my new API?
+   - What authentication/authorization is needed?
+
+3. Detect dependencies:
+   - What files import from what I'm about to create?
+   - What existing functions/utilities should I use?
+   - Are there similar patterns I should follow?
+   - What's the current error handling pattern?
+
+4. Map data flow:
+   - User action → Frontend → API → Database → Response
+   - Trace how data flows through the system
+   - Identify where my new code fits in this flow
+
+STEP 2: VERIFY NO DUPLICATION
+------------------------------
+Before creating new files, check if functionality already exists:
+
+Search for:
+- Similar API endpoints (grep in app/api/)
+- Existing utilities (search in lib/)
+- Similar database queries
+- Existing type definitions
+
+If found → REUSE, don't recreate!
+
+STEP 3: PLAN INTEGRATION
+-------------------------
+Map out EXACTLY how my new code will integrate:
+
+1. Frontend Integration:
+   - Which component files will call my API?
+   - What props/parameters will they pass?
+   - What response format do they expect?
+   - Will Cursor AI need to update any UI?
+
+2. Database Integration:
+   - Which tables am I reading from?
+   - Which tables am I writing to?
+   - Are there foreign key relationships?
+   - Do I need transactions?
+
+3. Cross-Feature Integration:
+   - Will my new feature affect existing features?
+   - Do I need to update existing API endpoints?
+   - Are there cascade effects I need to handle?
+
+STEP 4: DOCUMENT INTEGRATION POINTS
+------------------------------------
+Before coding, create mental map:
+
+INPUTS (what I receive):
+- From frontend: [list parameters]
+- From database: [list tables/fields]
+- From other APIs: [list dependencies]
+
+OUTPUTS (what I produce):
+- To frontend: [response format]
+- To database: [what I write]
+- To other systems: [side effects]
+
+STEP 5: VALIDATE UNDERSTANDING
+-------------------------------
+Ask yourself:
+✓ Do I understand how this fits in existing architecture?
+✓ Have I identified all integration points?
+✓ Do I know which Cursor/Copilot code will connect to mine?
+✓ Have I checked for duplicate functionality?
+✓ Do I know the full data flow?
+
+If NO to any → READ MORE FILES first!
+```
+
+### 📖 HOW TO USE THIS PROMPT
+
+**Example: Before Building Email System**
+
+```typescript
+// WRONG APPROACH (Don't do this!):
+// Just start coding without understanding existing code
+
+// RIGHT APPROACH:
+// 1. First, read these files to understand current architecture:
+
+await read('app/api/orders/route.ts')
+// → See how orders are created
+// → Understand response format
+// → See error handling pattern
+
+await read('lib/supabase/client.ts')
+// → Understand database connection pattern
+// → See how other features use Supabase
+
+await read('types/supabase.ts')
+// → See existing type definitions
+// → Understand database schema
+
+await grep('sendEmail', { path: 'app/api/' })
+// → Check if email sending already exists
+// → Avoid duplication
+
+await grep('toast.success', { path: 'app/' })
+// → Understand how UI shows success messages
+// → Know what Copilot will integrate
+
+// 2. Map integration points:
+/*
+INTEGRATION MAP for Email System:
+
+INPUTS:
+- Order data from app/api/checkout/route.ts
+- Customer email from order object
+- Product details from order items
+
+MY CODE WILL CREATE:
+- lib/email/client.ts (new)
+- app/api/email/send/route.ts (new)
+- types/email.ts (new)
+
+CURSOR AI WILL CONSUME:
+- POST /api/email/send endpoint
+- Response: { success: boolean, messageId: string }
+- Will add UI notifications in components/
+
+COPILOT WILL INTEGRATE:
+- Add API call in checkout flow
+- Add type imports
+- Handle error states
+
+DATA FLOW:
+1. User completes checkout
+2. app/api/checkout/route.ts creates order
+3. Calls my POST /api/email/send
+4. My code sends email via Resend
+5. Returns success/failure
+6. Copilot shows toast notification
+7. Cursor updates UI state
+*/
+
+// 3. Now I can code with full context!
+```
+
+### 🎯 DETECTION CHECKLIST
+
+Before implementing each task, verify:
+
+**Architecture Understanding:**
+- [ ] I've read all related existing files
+- [ ] I understand current patterns and conventions
+- [ ] I know where my code fits in the system
+- [ ] I've identified reusable utilities
+
+**Integration Detection:**
+- [ ] I know which frontend files will call my API
+- [ ] I know what database tables are involved
+- [ ] I've identified all foreign key relationships
+- [ ] I understand authentication flow
+
+**Collaboration Awareness:**
+- [ ] I know what Cursor AI will build (UI components)
+- [ ] I know what Copilot will integrate (API calls, types)
+- [ ] I've defined clear interfaces for them
+- [ ] I've documented expected request/response formats
+
+**No Duplication:**
+- [ ] I've searched for similar functionality
+- [ ] I'm not recreating existing utilities
+- [ ] I'm following existing patterns
+- [ ] I'm reusing existing types where possible
+
+---
+
 ## 🎯 PRIMARY RESPONSIBILITIES
 
 ### 1. Backend Development

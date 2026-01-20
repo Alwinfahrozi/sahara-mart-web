@@ -7,6 +7,416 @@
 
 ---
 
+## 📊 PROJECT STATUS CHECK (Updated: 2026-01-20)
+
+### ✅ ALREADY COMPLETED (85%) - DO NOT REBUILD!
+
+**Existing Integrations (DONE):**
+- ✅ Product CRUD integration - UI ↔ API fully connected
+- ✅ Order management integration - Working end-to-end
+- ✅ Stock operations integration - Add/export/logs connected
+- ✅ Image upload integration - Drag & drop → Supabase Storage
+- ✅ Cart integration - LocalStorage + WhatsApp checkout
+- ✅ Analytics integration - Dashboard fetches real-time data
+- ✅ Search integration - Basic search working
+- ✅ Filter integration - Category + price filters active
+
+**Type Safety (DONE):**
+- ✅ Database types (`types/supabase.ts`) - Generated from Supabase
+- ✅ Component prop types - All typed
+- ✅ API response types - Defined in route handlers
+- ✅ No critical `any` types in production code
+
+**Error Handling (DONE):**
+- ✅ API error responses - Standardized format
+- ✅ Toast notifications - Success/error messages
+- ✅ Loading states - Implemented across pages
+- ✅ Global error boundary - Catches unhandled errors
+
+**Utilities (DONE):**
+- ✅ CSRF protection (`lib/csrf.ts` + `lib/csrfClient.ts`)
+- ✅ Rate limiting (`lib/rateLimiter.ts`)
+- ✅ Data utilities (`lib/data.ts`)
+- ✅ Supabase clients (`lib/supabase/`)
+
+### 🚧 REMAINING WORK (15%) - YOUR FOCUS!
+
+**What You WILL Integrate (Not Connected Yet):**
+1. ❌ Email notification integration - **SAYA builds API, CURSOR builds UI, YOU CONNECT**
+2. ❌ Invoice PDF download - **SAYA builds generator, CURSOR builds button, YOU CONNECT**
+3. ❌ Customer auth integration - **SAYA builds backend, CURSOR builds forms, YOU CONNECT**
+4. ❌ Search autocomplete - **SAYA builds API, CURSOR builds dropdown, YOU CONNECT**
+5. ❌ Advanced filters - **Needs state management + URL params**
+6. ❌ Form validation schemas - **Client-side validation needed**
+
+**CRITICAL VERIFICATION BEFORE INTEGRATING:**
+```typescript
+// Step 1: Check SAYA built the backend
+await read('app/api/email/send/route.ts')
+// ✅ If exists → Backend ready
+
+// Step 2: Check CURSOR built the UI
+await read('components/admin/EmailNotificationBadge.tsx')
+// ✅ If exists → Frontend ready
+
+// Step 3: Check integration not done yet
+// Look for TODO comments or placeholder fetch calls
+// ✅ If found TODO → Your job to integrate!
+```
+
+**If integration already exists:**
+- 🔍 READ the existing code
+- 🐛 FIX bugs if any
+- ✨ ENHANCE with better error handling
+- 🚫 DON'T rewrite working integrations
+
+---
+
+## ⚠️ CRITICAL: READ BEFORE STARTING ANY TASK
+
+### 🔍 MANDATORY INTEGRATION ANALYSIS PROMPT
+
+**BEFORE integrating ANY feature, you MUST run this analysis:**
+
+```
+STEP 1: UNDERSTAND BOTH SIDES
+------------------------------
+I am the BRIDGE between frontend (Cursor) and backend (SAYA).
+Before connecting them, I must understand BOTH sides completely.
+
+1. Read BACKEND code (SAYA's work):
+   - What API endpoint was created?
+   - What's the exact request format?
+   - What's the exact response format?
+   - What authentication is needed?
+   - What error codes can be returned?
+
+2. Read FRONTEND code (Cursor's work):
+   - What component needs data?
+   - What props/state are defined?
+   - Where should I add the fetch call?
+   - What loading states exist?
+   - Where should errors be shown?
+
+3. Map the connection:
+   Frontend Component → My API Call → Backend Endpoint → Response → UI Update
+
+STEP 2: TRACE DATA FLOW
+------------------------
+Follow data from user action to database and back:
+
+USER ACTION:
+- What triggers the API call? (button click, form submit, page load)
+- Located in: [component file path]
+- Function name: [handler function]
+
+MY INTEGRATION POINT:
+- Where I add: fetch() or api.get() call
+- Parameters I pass: [from component state/props]
+- Response I expect: [from backend API]
+
+BACKEND PROCESSING (by SAYA):
+- Endpoint: [API route path]
+- Database: [tables read/written]
+- Business logic: [what happens server-side]
+
+RESPONSE HANDLING (my job):
+- Success: Update component state, show toast
+- Error: Catch error, show message, log
+- Loading: Set loading state before/after
+
+STEP 3: DETECT INTEGRATION REQUIREMENTS
+----------------------------------------
+Map EXACTLY what I need to connect:
+
+Check AI_TASK_CLAUDE.md:
+- What API did SAYA build?
+- What parameters are required?
+- What's returned on success?
+- What errors can occur?
+
+Check AI_TASK_CURSOR.md:
+- What UI component exists?
+- What state is defined?
+- Where should I add fetch?
+- What TODOs did Cursor leave for me?
+
+Example Integration Map:
+/*
+Feature: Email Notification Badge
+
+CURSOR CREATED:
+- File: components/admin/EmailNotificationBadge.tsx
+- State: status, loading, error
+- TODO: "Fetch email status from API"
+- useEffect: needs API call
+
+SAYA CREATED:
+- Endpoint: GET /api/email/status
+- Response: { success: boolean, data: { sent, failed, pending } }
+- Auth: Required (admin session)
+- Errors: 401 (unauthorized), 500 (server error)
+
+MY INTEGRATION:
+1. Add fetch in useEffect
+2. Define EmailStatusResponse type
+3. Handle loading state
+4. Handle error state
+5. Update status state on success
+6. Add auto-refresh (30s interval)
+*/
+
+STEP 4: CHECK DEPENDENCIES
+---------------------------
+Before integrating, verify all pieces exist:
+
+Backend Check (SAYA's code):
+- [ ] API endpoint file exists
+- [ ] Endpoint is exported and functional
+- [ ] Database connection works
+- [ ] Authentication middleware applied
+
+Frontend Check (Cursor's code):
+- [ ] Component file exists
+- [ ] State variables defined
+- [ ] Event handlers created
+- [ ] Loading/error UI in place
+
+My Dependencies:
+- [ ] Type definitions needed
+- [ ] Error handler utility needed
+- [ ] API client wrapper needed
+- [ ] Validation schema needed
+
+STEP 5: PLAN INTEGRATION STEPS
+-------------------------------
+Break down exactly what I'll add:
+
+1. Type Definitions:
+   ```typescript
+   interface RequestType { ... }
+   interface ResponseType { ... }
+   interface ErrorType { ... }
+   ```
+
+2. API Integration:
+   ```typescript
+   const response = await api.get<ResponseType>(endpoint)
+   ```
+
+3. Error Handling:
+   ```typescript
+   try { ... } catch (error) {
+     handleAPIError(error)
+     // Show user-friendly message
+   }
+   ```
+
+4. State Management:
+   ```typescript
+   setLoading(true)
+   // ... fetch
+   setData(response.data)
+   setLoading(false)
+   ```
+
+5. Validation:
+   ```typescript
+   // Client-side validation before API call
+   if (!validateInput(data)) return
+   ```
+
+STEP 6: VERIFY INTEGRATION COMPLETENESS
+----------------------------------------
+Before marking task complete, check:
+
+✓ Does data flow from UI → API → DB → Response → UI?
+✓ Are all error cases handled?
+✓ Is loading state shown during requests?
+✓ Are types properly defined (no `any`)?
+✓ Is validation in place?
+✓ Do success/error messages show to user?
+✓ Is the integration tested locally?
+
+If NO to any → INCOMPLETE! Keep working!
+```
+
+### 📖 HOW TO USE THIS PROMPT
+
+**Example: Integrating Invoice Download**
+
+```typescript
+// WRONG APPROACH (Don't do this!):
+// Blindly add fetch without understanding both sides
+
+// RIGHT APPROACH:
+
+// STEP 1: Read SAYA's backend code
+/*
+File: app/api/invoice/[orderId]/route.ts
+
+export async function GET(
+  req: Request,
+  { params }: { params: { orderId: string } }
+) {
+  // ... generates PDF
+  return new Response(pdfBuffer, {
+    headers: {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename="invoice-${orderNumber}.pdf"`
+    }
+  })
+}
+
+UNDERSTAND:
+- Takes orderId from URL params
+- Returns PDF as blob
+- No JSON response, direct file
+- Auth required (middleware)
+*/
+
+// STEP 2: Read Cursor's frontend code
+/*
+File: components/admin/InvoiceDownloadButton.tsx
+
+const [downloading, setDownloading] = useState(false)
+const [downloaded, setDownloaded] = useState(false)
+
+const handleDownload = async () => {
+  // TODO: Copilot adds fetch to /api/invoice/[orderId]
+}
+
+UNDERSTAND:
+- State already defined
+- Loading states ready
+- Need to implement handleDownload
+- Has orderId and orderNumber props
+*/
+
+// STEP 3: Plan complete integration
+/*
+INTEGRATION PLAN:
+
+1. Types needed:
+   - None! Returns blob, not JSON
+
+2. Fetch implementation:
+   - GET /api/invoice/[orderId]
+   - Handle blob response
+   - Create download link
+   - Trigger download
+
+3. Error handling:
+   - 404: Order not found
+   - 500: PDF generation failed
+   - Network error
+
+4. User feedback:
+   - Loading: "Generating..."
+   - Success: "Downloaded" + toast
+   - Error: Toast with message
+*/
+
+// STEP 4: Implement with full understanding
+const handleDownload = async () => {
+  setDownloading(true)
+
+  try {
+    // Fetch PDF from SAYA's endpoint
+    const response = await fetch(`/api/invoice/${orderId}`)
+
+    if (!response.ok) {
+      // Handle backend errors
+      if (response.status === 404) {
+        throw new Error('Invoice not found')
+      }
+      throw new Error('Failed to generate invoice')
+    }
+
+    // Handle blob response (not JSON!)
+    const blob = await response.blob()
+
+    // Create download (browser API)
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `invoice-${orderNumber}.pdf`
+    document.body.appendChild(link)
+    link.click()
+
+    // Cleanup
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+
+    // Update UI state
+    setDownloaded(true)
+    toast.success('Invoice downloaded!')
+
+    // Reset after 3s
+    setTimeout(() => setDownloaded(false), 3000)
+  } catch (error) {
+    // Error handling with user-friendly message
+    console.error('Invoice download error:', error)
+    toast.error(
+      error instanceof Error
+        ? error.message
+        : 'Failed to download invoice'
+    )
+  } finally {
+    setDownloading(false)
+  }
+}
+
+// Complete integration:
+// ✓ Connects Cursor UI to SAYA API
+// ✓ Handles all states (loading, success, error)
+// ✓ User feedback via toast
+// ✓ Proper cleanup
+// ✓ Error messages helpful
+```
+
+### 🎯 DETECTION CHECKLIST
+
+Before integrating each feature, verify:
+
+**Understanding Both Sides:**
+- [ ] I've read SAYA's backend API code
+- [ ] I've read Cursor's frontend component code
+- [ ] I understand request/response formats
+- [ ] I know all possible error scenarios
+
+**Type Safety:**
+- [ ] Request types defined
+- [ ] Response types defined
+- [ ] Error types defined
+- [ ] No `any` types used
+
+**Error Handling:**
+- [ ] Try-catch around API calls
+- [ ] Specific error messages for each error type
+- [ ] User sees helpful error messages
+- [ ] Errors logged for debugging
+
+**State Management:**
+- [ ] Loading state before request
+- [ ] Success state after response
+- [ ] Error state on failure
+- [ ] Reset state as needed
+
+**User Experience:**
+- [ ] Loading indicator shows
+- [ ] Success feedback (toast/message)
+- [ ] Error feedback (toast/message)
+- [ ] Smooth transitions
+
+**Testing:**
+- [ ] Tested success case
+- [ ] Tested error cases
+- [ ] Tested loading states
+- [ ] Verified data flow
+
+---
+
 ## 🎯 PRIMARY RESPONSIBILITIES
 
 ### 1. Frontend-Backend Integration
