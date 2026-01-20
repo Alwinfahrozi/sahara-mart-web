@@ -102,7 +102,7 @@ cd sahara-mart-web
 # Install dependencies
 npm install
 
-# Setup environment variables
+# Setup environment variables (IMPORTANT!)
 cp .env.example .env.local
 # Edit .env.local dengan Supabase credentials Anda
 
@@ -111,6 +111,49 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
+
+---
+
+## ⚠️ Environment Variables Setup
+
+**IMPORTANT:** Follow these steps carefully to avoid security issues.
+
+### Local Development
+
+1. **Copy the template file:**
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. **Fill in your actual Supabase credentials:**
+   - Get values from [Supabase Dashboard](https://supabase.com/dashboard) → Settings → API
+   - `NEXT_PUBLIC_SUPABASE_URL`: Your project URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your anon/public key
+   - `SUPABASE_SERVICE_ROLE_KEY`: Your service role key (KEEP SECRET!)
+   - **NEVER commit `.env.local` to git!**
+
+3. **Verify setup:**
+   ```bash
+   npm run dev
+   # App should start without errors
+   ```
+
+### Production (Vercel)
+
+1. Go to **Vercel Dashboard** → Your Project → **Settings** → **Environment Variables**
+2. Add all variables from `.env.example`
+3. Use actual production values
+4. Deploy
+
+### Security Rules
+
+- ❌ **NEVER** commit `.env` or `.env.local` files
+- ✅ **Always** use `.env.example` as template
+- ✅ Service role key = **full DB access** - keep secret!
+- ✅ Use Vercel environment variables in production
+- ⚠️ If you accidentally commit secrets, **rotate keys immediately** in Supabase Dashboard
+
+---
 
 ---
 
